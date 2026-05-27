@@ -543,8 +543,7 @@ function LandingPageInner() {
           <SectionHeading title="광고계정도, 결제도, 데이터도 대표님 소유입니다" />
           <div className="mt-8 rounded-[10px] border-l-4 border-orange bg-gradient-to-r from-[#fff7ed] to-[#ffedd4] px-5 py-5 sm:px-7">
             <p className="text-base leading-relaxed text-navy sm:text-lg">
-              광고비는 대표님의 자산입니다. 광고를 집행할수록 데이터가 쌓여야
-              하고, 그 데이터는 대표님 계정에 남아야 합니다.
+              광고비와 데이터는 모두 대표님 계정에 투명하게 쌓이는 대표님 자산입니다.
             </p>
           </div>
 
@@ -620,12 +619,16 @@ function LandingPageInner() {
 
       {/* Pricing */}
       <section id="pricing" className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-3xl">
           <SectionHeading
             title="월 49만 9천원으로 전문 마케터를 고용한 것처럼"
-            subtitle="직원 1명을 채용하는 비용보다 낮은 금액으로, 광고 운영 전문가를 외부 마케터처럼 활용하세요."
+            subtitle={
+              <span className="block text-sm leading-snug sm:text-base">
+                직원 채용비보다 낮게, 광고 운영 전문가를 외부 마케터처럼 활용하세요.
+              </span>
+            }
           />
-          <div className="relative mt-10 rounded-2xl border-2 border-orange bg-white p-6 shadow-xl sm:p-8">
+          <div className="relative mx-auto mt-10 max-w-2xl rounded-2xl border-2 border-orange bg-white p-6 shadow-xl sm:p-8">
             <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-orange px-4 py-1 text-sm font-medium text-white">
               대표 추천
             </span>
@@ -636,9 +639,9 @@ function LandingPageInner() {
               월 499,000원
             </p>
             <p className="mt-4 text-center text-base leading-relaxed text-gray-muted">
-              광고 담당자를 채용하기 부담스러운 소상공인 대표님을 위한 광고 운영
-              패키지입니다. 런웨이가 광고 세팅부터 운영관리까지 대신
-              맡아드립니다.
+              광고 담당자를 채용하기 부담스러운 소상공인 대표님을 위한 광고 운영 패키지입니다.
+              <br />
+              런웨이가 광고 세팅부터 운영관리까지 대신 맡아드립니다.
             </p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {PACKAGE_FEATURES.map((feature) => (
@@ -652,9 +655,7 @@ function LandingPageInner() {
               ))}
             </ul>
             <div className="mt-6 rounded-[10px] border border-[#ffd6a8] bg-[#fff7ed] px-5 py-4 text-sm leading-relaxed text-navy">
-              <strong>중요:</strong> 광고비는 별도입니다. 광고비는 대표님
-              광고계정에서 직접 결제됩니다. 런웨이는 광고비 수수료를 받지
-              않습니다.
+              <strong>중요:</strong> 광고비는 별도입니다. 광고비는 대표님 광고계정에서 직접 결제됩니다.
             </div>
             <div className="mt-6 flex justify-center">
               <PrimaryButton
