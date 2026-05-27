@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const HERO_GRADIENT =
   "linear-gradient(180deg, #0a1628 0%, #0c182b 25%, #101d32 50%, #142238 75%, #1a2a42 100%)";
@@ -194,6 +195,22 @@ const FAQ_ITEMS = [
   },
 ];
 
+type LeadPayload = {
+  name: string;
+  phone: string;
+  business_type?: string;
+  region?: string;
+  message?: string;
+  privacy_agreed: boolean;
+  utm_source?: string | null;
+  utm_medium?: string | null;
+  utm_campaign?: string | null;
+  utm_content?: string | null;
+  utm_term?: string | null;
+  referrer?: string | null;
+  landing_page?: string | null;
+};
+
 function SectionHeading({
   title,
   subtitle,
@@ -261,17 +278,134 @@ function SecondaryButton({
   );
 }
 
-export default function LandingPage() {
+function LandingPageInner() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [agreed, setAgreed] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [businessType, setBusinessType] = useState("");
+  const [region, setRegion] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
+  const [utm, setUtm] = useState<{
+    utm_source?: string | null;
+    utm_medium?: string | null;
+    utm_campaign?: string | null;
+    utm_content?: string | null;
+    utm_term?: string | null;
+  }>({});
+  const [referrer, setReferrer] = useState<string | null>(null);
+  const [landingPage, setLandingPage] = useState<string | null>(null);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const source = searchParams.get("utm_source");
+    const medium = searchParams.get("utm_medium");
+    const campaign = searchParams.get("utm_campaign");
+    const content = searchParams.get("utm_content");
+    const term = searchParams.get("utm_term");
+
+    setUtm({
+      utm_source: source,
+      utm_medium: medium,
+      utm_campaign: campaign,
+      utm_content: content,
+      utm_term: term,
+    });
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setReferrer(document.referrer || null);
+    setLandingPage(window.location.href);
+  }, []);
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!agreed) {
-      alert("개인정보 수집·이용에 동의해 주세요.");
+    setSubmitError(null);
+    setSubmitSuccess(null);
+
+    if (!name.trim() || !phone.trim()) {
+      setSubmitError("이름과 연락처를 입력해 주세요.");
       return;
     }
-    alert("상담 신청이 접수되었습니다. (UI만 구현된 상태입니다)");
+
+    if (!agreed) {
+      setSubmitError("개인정보 수집·이용에 동의해 주세요.");
+      return;
+    }
+
+    const payload: LeadPayload = {
+      name: name.trim(),
+      phone: phone.trim(),
+      business_type: businessType.trim() || undefined,
+      region: region.trim() || undefined,
+      message: message.trim() || undefined,
+      privacy_agreed: agreed,
+      utm_source: utm.utm_source ?? null,
+      utm_medium: utm.utm_medium ?? null,
+      utm_campaign: utm.utm_campaign ?? null,
+      utm_content: utm.utm_content ?? null,
+      utm_term: utm.utm_term ?? null,
+      referrer,
+      landing_page: landingPage,
+    };
+
+    try {
+      setIsSubmitting(true);
+
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json()) as { success: boolean; error?: string };
+
+      if (!response.ok || !result.success) {
+        setSubmitError(result.error || "상담 신청 처리 중 오류가 발생했습니다.");
+        return;
+      }
+
+      if (typeof window !== "undefined") {
+        const anyWindow = window as typeof window & {
+          gtag?: (...args: any[]) => void;
+          fbq?: (...args: any[]) => void;
+        };
+
+        if (typeof anyWindow.gtag === "function") {
+          anyWindow.gtag("event", "generate_lead", {
+            event_category: "engagement",
+            event_label: "consultation_form",
+            value: 1,
+          });
+        }
+
+        if (typeof anyWindow.fbq === "function") {
+          anyWindow.fbq("track", "Lead");
+        }
+      }
+
+      setSubmitSuccess(
+        "상담 신청이 완료되었습니다. 남겨주신 정보를 확인한 뒤 빠른 시간 내에 연락드리겠습니다.",
+      );
+      setName("");
+      setPhone("");
+      setBusinessType("");
+      setRegion("");
+      setMessage("");
+      setAgreed(false);
+    } catch (error) {
+      console.error("Lead submit error:", error);
+      setSubmitError("일시적인 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -653,6 +787,8 @@ export default function LandingPage() {
                 required
                 placeholder="홍길동"
                 className="w-full rounded-[10px] border border-[#d1d5dc] px-4 py-3 text-base outline-none focus:border-orange focus:ring-2 focus:ring-orange/20"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div>
@@ -666,6 +802,8 @@ export default function LandingPage() {
                 required
                 placeholder="010-0000-0000"
                 className="w-full rounded-[10px] border border-[#d1d5dc] px-4 py-3 text-base outline-none focus:border-orange focus:ring-2 focus:ring-orange/20"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
             <div>
@@ -678,6 +816,8 @@ export default function LandingPage() {
                 type="text"
                 placeholder="예: 미용실, 필라테스, 카페 등"
                 className="w-full rounded-[10px] border border-[#d1d5dc] px-4 py-3 text-base outline-none focus:border-orange focus:ring-2 focus:ring-orange/20"
+                value={businessType}
+                onChange={(e) => setBusinessType(e.target.value)}
               />
             </div>
             <div>
@@ -690,6 +830,8 @@ export default function LandingPage() {
                 type="text"
                 placeholder="예: 서울 강남구 역삼동"
                 className="w-full rounded-[10px] border border-[#d1d5dc] px-4 py-3 text-base outline-none focus:border-orange focus:ring-2 focus:ring-orange/20"
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
               />
             </div>
             <div>
@@ -702,6 +844,8 @@ export default function LandingPage() {
                 rows={4}
                 placeholder="광고 관련 궁금한 점이나 목표를 자유롭게 작성해주세요."
                 className="w-full resize-y rounded-[10px] border border-[#d1d5dc] px-4 py-3 text-base outline-none focus:border-orange focus:ring-2 focus:ring-orange/20"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               />
             </div>
             <div className="rounded-[10px] bg-gray-50 p-4">
@@ -734,11 +878,22 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
+            {submitError && (
+              <p className="text-sm text-red-600" role="alert">
+                {submitError}
+              </p>
+            )}
+            {submitSuccess && (
+              <p className="text-sm text-green-700" role="status">
+                {submitSuccess}
+              </p>
+            )}
             <button
               type="submit"
-              className="w-full rounded-[10px] bg-orange py-4 text-base font-medium text-white transition-opacity hover:opacity-90"
+              disabled={isSubmitting}
+              className="w-full rounded-[10px] bg-orange py-4 text-base font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
             >
-              상담 신청하기
+              {isSubmitting ? "신청 중..." : "상담 신청하기"}
             </button>
           </form>
         </div>
@@ -758,5 +913,13 @@ export default function LandingPage() {
         </p>
       </footer>
     </div>
+  );
+}
+
+export default function LandingPage() {
+  return (
+    <Suspense fallback={null}>
+      <LandingPageInner />
+    </Suspense>
   );
 }
