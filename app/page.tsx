@@ -487,7 +487,7 @@ function LandingPageInner() {
                 key={item.title}
                 className="rounded-[14px] bg-white p-6 shadow-sm"
               >
-                <h3 className="whitespace-nowrap text-[clamp(1rem,3.5vw,1.125rem)] font-semibold leading-snug text-navy">
+                <h3 className="whitespace-nowrap break-keep text-[clamp(1rem,3.5vw,1.125rem)] font-semibold leading-snug text-navy sm:whitespace-normal sm:text-lg">
                   {item.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-gray-muted">
