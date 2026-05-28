@@ -65,19 +65,19 @@ const BADGES = [
 
 const PROBLEMS = [
   {
-    title: "광고 담당자 채용하기엔\n비용이 부담된다",
+    title: "광고 담당자 채용하기엔 비용이 부담된다",
     desc: "마케팅 직원을 뽑기엔 인건비가 너무 비싸고, 한 명을 채용할 만큼 업무가 많지 않습니다.",
   },
   {
-    title: "광고를 직접 하려니\n방법을 잘 모르겠다",
+    title: "광고를 직접 하려니 방법을 잘 모르겠다",
     desc: "광고 세팅, 타겟팅, 입찰, 전환 추적 등 전문 용어와 설정이 복잡합니다.",
   },
   {
-    title: "광고비를 써도\n문의가 늘지 않는다",
+    title: "광고비를 써도 문의가 늘지 않는다",
     desc: "광고비는 계속 나가는데 실제로 전화 문의나 방문으로 이어지지 않습니다.",
   },
   {
-    title: "다른 대행사는 광고비가\n불투명해 불안하다",
+    title: "다른 대행사는 광고비가 불투명해 불안하다",
     desc: "광고비에 수수료를 얼마나 붙이는지, 실제로 얼마가 집행되는지 알 수 없습니다.",
   },
 ];
@@ -445,11 +445,11 @@ function LandingPageInner() {
             </SecondaryButton>
           </div>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-2">
+          <div className="mt-10 grid w-full max-w-md grid-cols-2 gap-2 sm:flex sm:max-w-none sm:flex-wrap sm:justify-center">
             {BADGES.map((badge) => (
               <span
                 key={badge}
-                className="rounded-[10px] bg-white/10 px-3 py-2.5 text-xs text-white sm:px-4 sm:text-sm"
+                className="rounded-[10px] bg-white/10 px-3 py-2.5 text-center text-xs text-white sm:px-4 sm:text-sm"
               >
                 {badge}
               </span>
@@ -464,9 +464,12 @@ function LandingPageInner() {
           <SectionHeading
             title={
               <>
-                광고 담당자를 뽑기에는 부담스럽고,
-                <br />
-                직접 운영하기에는 너무 복잡하셨나요?
+                <span className="block whitespace-nowrap text-[clamp(1.2rem,5vw,1.9rem)] leading-[1.3] sm:text-[inherit] sm:leading-[inherit]">
+                  광고 담당자를 뽑기에는 부담스럽고,
+                </span>
+                <span className="block whitespace-nowrap text-[clamp(1.2rem,5vw,1.9rem)] leading-[1.3] sm:text-[inherit] sm:leading-[inherit]">
+                  직접 운영하기에는 너무 복잡하셨나요?
+                </span>
               </>
             }
             subtitle={
@@ -484,7 +487,7 @@ function LandingPageInner() {
                 key={item.title}
                 className="rounded-[14px] bg-white p-6 shadow-sm"
               >
-                <h3 className="whitespace-pre-line text-lg font-semibold leading-snug text-navy">
+                <h3 className="whitespace-nowrap text-[clamp(1rem,3.5vw,1.125rem)] font-semibold leading-snug text-navy">
                   {item.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-gray-muted">
@@ -502,9 +505,12 @@ function LandingPageInner() {
           <SectionHeading
             title={
               <>
-                대표님은 사업에만 집중하세요.
-                <br />
-                광고는 런웨이가 대신 해드립니다.
+                <span className="block whitespace-nowrap text-[clamp(1.2rem,5vw,1.85rem)] leading-[1.3] sm:text-[inherit] sm:leading-[inherit]">
+                  대표님은 사업에만 집중하세요.
+                </span>
+                <span className="block whitespace-nowrap text-[clamp(1.2rem,5vw,1.85rem)] leading-[1.3] sm:text-[inherit] sm:leading-[inherit]">
+                  광고는 런웨이가 대신 해드립니다.
+                </span>
               </>
             }
             subtitle={
@@ -540,7 +546,18 @@ function LandingPageInner() {
       {/* Ownership */}
       <section id="ownership" className="bg-gray-50 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <SectionHeading title="광고계정도, 결제도, 데이터도 대표님 소유입니다" />
+          <SectionHeading
+            title={
+              <>
+                <span className="block text-[1.85rem] leading-[1.25] sm:text-[inherit] sm:leading-[inherit]">
+                  광고계정도, 결제도,
+                </span>
+                <span className="block text-[1.85rem] leading-[1.25] sm:text-[inherit] sm:leading-[inherit]">
+                  데이터도 대표님 소유입니다
+                </span>
+              </>
+            }
+          />
           <div className="mt-8 rounded-[10px] border-l-4 border-orange bg-gradient-to-r from-[#fff7ed] to-[#ffedd4] px-5 py-5 sm:px-7">
             <p className="text-base leading-relaxed text-navy sm:text-lg">
               광고비와 데이터는 모두 대표님 계정에 투명하게 쌓이는 대표님 자산입니다.
@@ -599,16 +616,20 @@ function LandingPageInner() {
                 </p>
                 <div className="border-b border-[#f3f4f6] px-4 py-3">
                   <p className="text-xs font-medium text-[#6a7282]">일반 대행사</p>
-                  <p className="mt-1 flex items-start gap-2 text-sm text-[#6a7282]">
-                    <XIcon className="mt-0.5 shrink-0" />
-                    {row.agency}
+                  <p className="mt-1 flex w-full items-start gap-2 text-sm text-[#6a7282]">
+                    <XIcon className="mt-0.5 size-4 shrink-0" />
+                    <span className="min-w-0 flex-1 break-keep leading-relaxed">
+                      {row.agency}
+                    </span>
                   </p>
                 </div>
                 <div className="bg-[#fff7ed] px-4 py-3">
                   <p className="text-xs font-bold text-orange">런웨이</p>
-                  <p className="mt-1 flex items-start gap-2 text-sm font-medium text-navy">
-                    <CheckIcon className="mt-0.5 shrink-0" />
-                    {row.runway}
+                  <p className="mt-1 flex w-full items-start gap-2 text-sm font-medium text-navy">
+                    <CheckIcon className="mt-0.5 size-4 shrink-0" />
+                    <span className="min-w-0 flex-1 break-keep leading-relaxed">
+                      {row.runway}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -621,11 +642,25 @@ function LandingPageInner() {
       <section id="pricing" className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <SectionHeading
-            title="월 49만 9천원으로 전문 마케터를 고용한 것처럼"
+            title={
+              <>
+                <span className="block text-[1.85rem] leading-[1.25] sm:text-[inherit] sm:leading-[inherit]">
+                  월 49만 9천원으로
+                </span>
+                <span className="block text-[1.85rem] leading-[1.25] sm:text-[inherit] sm:leading-[inherit]">
+                  전문 마케터를 고용한 것처럼
+                </span>
+              </>
+            }
             subtitle={
-              <span className="block text-sm leading-snug sm:text-base">
-                직원 채용비보다 낮게, 광고 운영 전문가를 외부 마케터처럼 활용하세요.
-              </span>
+              <>
+                <span className="block text-sm leading-snug sm:text-base">
+                  직원 채용비보다 낮게, 광고 운영 전문가를
+                </span>
+                <span className="block text-sm leading-snug sm:text-base">
+                  외부 마케터처럼 활용하세요
+                </span>
+              </>
             }
           />
           <div className="relative mx-auto mt-10 max-w-2xl rounded-2xl border-2 border-orange bg-white p-6 shadow-xl sm:p-8">
@@ -637,11 +672,6 @@ function LandingPageInner() {
             </h3>
             <p className="mt-4 text-center text-4xl font-normal text-navy sm:text-5xl">
               월 499,000원
-            </p>
-            <p className="mt-4 text-center text-base leading-relaxed text-gray-muted">
-              광고 담당자를 채용하기 부담스러운 소상공인 대표님을 위한 광고 운영 패키지입니다.
-              <br />
-              런웨이가 광고 세팅부터 운영관리까지 대신 맡아드립니다.
             </p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {PACKAGE_FEATURES.map((feature) => (
@@ -672,7 +702,18 @@ function LandingPageInner() {
       {/* Process */}
       <section id="process" className="bg-gray-50 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">
-          <SectionHeading title="처음 시작하는 대표님도 쉽게 진행됩니다" />
+          <SectionHeading
+            title={
+              <>
+                <span className="block text-[1.85rem] leading-[1.25] sm:text-[inherit] sm:leading-[inherit]">
+                  처음 시작하는 대표님도
+                </span>
+                <span className="block text-[1.85rem] leading-[1.25] sm:text-[inherit] sm:leading-[inherit]">
+                  쉽게 진행됩니다
+                </span>
+              </>
+            }
+          />
           <ol className="mt-10 space-y-6">
             {PROCESS_STEPS.map((item, index) => (
               <li key={item.step} className="flex gap-4 sm:gap-6">
@@ -742,17 +783,19 @@ function LandingPageInner() {
             light
             title={
               <>
-                광고 담당자를 뽑기 부담스럽다면,
-                <br />
-                월 49만 9천원으로 런웨이를 고용하세요
+                <span className="block whitespace-nowrap text-[clamp(1.1rem,4.7vw,1.85rem)] leading-[1.3] sm:text-[inherit] sm:leading-[inherit]">
+                  광고 담당자를 뽑기 부담스럽다면,
+                </span>
+                <span className="block whitespace-nowrap text-[clamp(1.1rem,4.7vw,1.85rem)] leading-[1.3] sm:text-[inherit] sm:leading-[inherit]">
+                  월 49만 9천원으로 런웨이를 고용하세요
+                </span>
               </>
             }
             subtitle={
               <>
-                대표님은 사업에만 집중하세요
-                <br />
-                광고 전략, 문구, 이미지, 세팅, 운영관리는 런웨이가 대신
-                해드립니다
+                <span className="block">대표님은 사업에만 집중하세요</span>
+                <span className="block">광고 전략, 문구, 이미지, 세팅, 운영관리는</span>
+                <span className="block">런웨이가 대신 해드립니다</span>
               </>
             }
           />
@@ -771,7 +814,8 @@ function LandingPageInner() {
             상담 신청
           </h2>
           <p className="mt-3 text-center text-base text-gray-muted">
-            간단한 정보를 입력해주시면 빠른 시간 내에 연락드리겠습니다.
+            <span className="block">간단한 정보를 입력해주세요</span>
+            <span className="block">빠른 시간 내에 연락드리겠습니다</span>
           </p>
           <form
             onSubmit={handleFormSubmit}
@@ -906,6 +950,7 @@ function LandingPageInner() {
         <p className="mt-2 text-sm text-gray-light">투명한 광고 운영 파트너</p>
         <div className="mt-6 space-y-1 text-xs text-gray-light">
           <p>사업자등록번호: 326-02-03126</p>
+          <p>통신판매신고: 제 2026-서울영등포-1088 호</p>
           <p>이메일: ads.runwaykorea@gmail.com</p>
           <p>사업장소재지: 서울특별시 영등포구 국회대로38길 8, 403호</p>
         </div>
