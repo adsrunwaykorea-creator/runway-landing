@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import "./landing.css";
 
@@ -196,6 +196,8 @@ function LandingPageInner() {
   }>({});
   const [referrer, setReferrer] = useState<string | null>(null);
   const [landingPage, setLandingPage] = useState<string | null>(null);
+  const [showStickyCta, setShowStickyCta] = useState(true);
+  const consultationRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setUtm({
@@ -211,6 +213,25 @@ function LandingPageInner() {
     if (typeof window === "undefined") return;
     setReferrer(document.referrer || null);
     setLandingPage(window.location.href);
+  }, []);
+
+  useEffect(() => {
+    const section = consultationRef.current;
+    if (!section) return;
+
+    const updateStickyCta = () => {
+      const { top } = section.getBoundingClientRect();
+      setShowStickyCta(top > window.innerHeight - 80);
+    };
+
+    updateStickyCta();
+    window.addEventListener("scroll", updateStickyCta, { passive: true });
+    window.addEventListener("resize", updateStickyCta);
+
+    return () => {
+      window.removeEventListener("scroll", updateStickyCta);
+      window.removeEventListener("resize", updateStickyCta);
+    };
   }, []);
 
   const scrollToForm = () => scrollTo("consultation-form");
@@ -639,7 +660,11 @@ function LandingPageInner() {
       </section>
 
       {/* 9. 상담신청 폼 */}
-      <section id="consultation" className="scroll-mt-3 px-4 py-10 sm:scroll-mt-4 sm:px-6 sm:py-12">
+      <section
+        ref={consultationRef}
+        id="consultation"
+        className="scroll-mt-3 px-4 py-10 sm:scroll-mt-4 sm:px-6 sm:py-12"
+      >
         <div className="mx-auto max-w-xl">
           <h2 className="text-center text-lg font-semibold sm:text-2xl">상담 신청</h2>
           <p className="mt-2 text-center text-[13px] text-[#64748b] sm:text-sm">
@@ -772,10 +797,13 @@ function LandingPageInner() {
         </div>
       </section>
 
-      {/* 모바일 하단 고정 CTA */}
+      {/* 모바일 하단 고정 CTA — 상담 신청 섹션에서는 숨김 */}
       <div
-        className="fixed inset-x-0 bottom-0 z-50 border-t border-[#e2e8f0] bg-white/95 px-4 py-3 backdrop-blur-sm sm:hidden"
+        className={`fixed inset-x-0 bottom-0 z-50 border-t border-[#e2e8f0] bg-white/95 px-4 py-3 backdrop-blur-sm transition-transform duration-300 ease-out sm:hidden ${
+          showStickyCta ? "translate-y-0" : "pointer-events-none translate-y-full"
+        }`}
         style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
+        aria-hidden={!showStickyCta}
       >
         <div className="mx-auto flex max-w-lg">
           <button
