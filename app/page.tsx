@@ -454,6 +454,9 @@ function LandingPageInner() {
               >
                 런웨이 운영 후
               </h3>
+              <p className="performance-after-channel mx-auto mt-2 text-center text-[14px] sm:text-[16px]">
+                당근 + 인스타 광고 운영
+              </p>
               <p
                 className="mx-auto mt-2 w-fit rounded-full px-3 py-1 text-xs text-white"
                 style={{ backgroundColor: BLUE }}

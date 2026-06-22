@@ -303,3 +303,12 @@
     stroke-dashoffset: 0;
   }
 }
+
+.performance-after-channel {
+  font-weight: 900;
+  color: #dc2626;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid #ef4444;
+  width: fit-content;
+}
