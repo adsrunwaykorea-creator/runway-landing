@@ -260,6 +260,28 @@
   text-overflow: ellipsis;
 }
 
+@media (min-width: 768px) {
+  .compact-card-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .compact-card-list .compact-card {
+    width: min(100%, 27rem);
+    max-width: 27rem;
+    justify-content: flex-start;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .compact-card-list .problem-card__text {
+    flex: 1;
+    overflow: visible;
+    text-overflow: unset;
+  }
+}
+
 @media (min-width: 640px) {
   .problem-check {
     width: 1.5rem;

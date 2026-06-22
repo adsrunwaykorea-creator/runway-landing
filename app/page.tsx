@@ -361,13 +361,13 @@ function LandingPageInner() {
 
       {/* 2. 문제 공감 */}
       <section className="px-4 py-10 sm:px-6 sm:py-12" style={{ backgroundColor: BLUE_LIGHT }}>
-        <div className="mx-auto max-w-lg sm:max-w-3xl">
+        <div className="mx-auto max-w-lg">
           <SectionTitle>이런 고민이 있으신가요?</SectionTitle>
-          <ul className="mt-5 space-y-2 sm:mt-6 sm:space-y-2.5">
+          <ul className="compact-card-list mt-5 space-y-2 sm:mt-6 sm:space-y-2.5">
             {PROBLEMS.map((item, index) => (
               <li
                 key={item}
-                className="problem-card flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 shadow-sm sm:gap-3 sm:px-4 sm:py-3"
+                className="compact-card flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 shadow-sm sm:gap-3 sm:px-4 sm:py-3"
               >
                 <ProblemCheck delayMs={index * 250} />
                 <span className="problem-card__text min-w-0 flex-1 text-[13px] font-bold leading-none text-[#1e293b] sm:text-[15px]">
@@ -509,13 +509,13 @@ function LandingPageInner() {
 
       {/* 4. 서비스 제공 내역 */}
       <section className="px-4 py-10 sm:px-6 sm:py-12" style={{ backgroundColor: BLUE_LIGHT }}>
-        <div className="mx-auto max-w-lg sm:max-w-3xl">
+        <div className="mx-auto max-w-lg">
           <SectionTitle>런웨이는 이렇게 도와드립니다</SectionTitle>
-          <ul className="mt-5 space-y-2 sm:mt-6 sm:space-y-2.5">
+          <ul className="compact-card-list mt-5 space-y-2 sm:mt-6 sm:space-y-2.5">
             {SERVICE_CARDS.map((card, index) => (
               <li
                 key={card.title}
-                className="flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 shadow-sm sm:gap-3 sm:px-4 sm:py-3"
+                className="compact-card flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 shadow-sm sm:gap-3 sm:px-4 sm:py-3"
               >
                 <span
                   className="flex size-6 shrink-0 items-center justify-center rounded-md text-[11px] font-bold text-white sm:size-7 sm:text-xs"
@@ -561,13 +561,13 @@ function LandingPageInner() {
 
       {/* 6. 효과적인 대상 */}
       <section className="px-4 py-10 sm:px-6 sm:py-12" style={{ backgroundColor: BLUE_LIGHT }}>
-        <div className="mx-auto max-w-lg sm:max-w-3xl">
+        <div className="mx-auto max-w-lg">
           <SectionTitle>이런 분에게 효과적입니다</SectionTitle>
-          <ul className="mt-5 space-y-2 sm:mt-6 sm:space-y-2.5">
+          <ul className="compact-card-list mt-5 space-y-2 sm:mt-6 sm:space-y-2.5">
             {TARGET_AUDIENCE.map((item) => (
               <li
                 key={item}
-                className="flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 shadow-sm sm:gap-3 sm:px-4 sm:py-3"
+                className="compact-card flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 shadow-sm sm:gap-3 sm:px-4 sm:py-3"
               >
                 <span className="shrink-0 text-[15px] font-bold leading-none sm:text-base" style={{ color: BLUE }}>
                   ·
