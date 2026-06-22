@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,9 +13,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "런웨이 | 소상공인 SNS 광고 운영",
+  title: "런웨이 | 소상공인 광고관리",
   description:
-    "월 49만 9천원으로 전문 마케터를 고용하세요. 당근·메타 광고 세팅과 운영은 런웨이가 대신 해드립니다.",
+    "월 330,000원부터 전문 마케터 구독. 9년차 퍼포먼스 마케터가 광고 세팅부터 운영, 보고서까지 도와드립니다.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
