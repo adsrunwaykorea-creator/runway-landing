@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { DaangnPixelScripts } from "@/components/daangn-pixel";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -46,6 +47,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* End Google Tag Manager */}
+        <DaangnPixelScripts />
       </head>
       <body className="min-h-full flex flex-col">
         {/* Google Tag Manager (noscript) */}

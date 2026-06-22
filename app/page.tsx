@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { trackDaangnSubmitApplication } from "@/lib/tracking/daangn-pixel";
 import "./landing.css";
 
 const BLUE = "#2563eb";
@@ -198,6 +199,7 @@ function LandingPageInner() {
   const [landingPage, setLandingPage] = useState<string | null>(null);
   const [showStickyCta, setShowStickyCta] = useState(true);
   const consultationRef = useRef<HTMLElement>(null);
+  const daangnConversionTrackedRef = useRef(false);
 
   useEffect(() => {
     setUtm({
@@ -238,8 +240,14 @@ function LandingPageInner() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
+
     setSubmitError(null);
     setSubmitSuccess(null);
+    daangnConversionTrackedRef.current = false;
 
     if (!name.trim() || !phone.trim()) {
       setSubmitError("이름과 연락처를 입력해 주세요.");
@@ -281,6 +289,11 @@ function LandingPageInner() {
       if (!response.ok || !result.success) {
         setSubmitError(result.error || "상담 신청 처리 중 오류가 발생했습니다.");
         return;
+      }
+
+      if (!daangnConversionTrackedRef.current) {
+        daangnConversionTrackedRef.current = true;
+        await trackDaangnSubmitApplication();
       }
 
       if (typeof window !== "undefined") {
