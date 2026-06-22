@@ -105,7 +105,7 @@ type LeadPayload = {
   utm_content?: string | null;
   utm_term?: string | null;
   referrer?: string | null;
-  landing_page?: string | null;
+  page_source?: string | null;
 };
 
 function formatPerformanceLine(text: string) {
@@ -264,7 +264,7 @@ function LandingPageInner() {
       utm_content: utm.utm_content ?? null,
       utm_term: utm.utm_term ?? null,
       referrer,
-      landing_page: landingPage,
+      page_source: landingPage,
     };
 
     try {

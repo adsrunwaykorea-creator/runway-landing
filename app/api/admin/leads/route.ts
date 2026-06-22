@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
 import { getAdminUser } from "@/lib/auth/admin";
+import {
+  CONSULTATION_LEADS_TABLE,
+  mapConsultationLead,
+  type ConsultationLeadRow,
+} from "@/lib/consultation-leads";
 import { createServiceClient } from "@/lib/supabase/service";
 import type { LeadStatus } from "@/lib/types/lead";
 
@@ -26,7 +31,7 @@ export async function GET(request: Request) {
   const q = searchParams.get("q")?.trim();
 
   let query = supabase
-    .from("leads")
+    .from(CONSULTATION_LEADS_TABLE)
     .select("*")
     .order("created_at", { ascending: false });
 
@@ -41,17 +46,20 @@ export async function GET(request: Request) {
   if (q) {
     const pattern = `%${q}%`;
     query = query.or(
-      `name.ilike.${pattern},phone.ilike.${pattern},business_type.ilike.${pattern},region.ilike.${pattern}`,
+      `lead_name.ilike.${pattern},phone.ilike.${pattern},business_type.ilike.${pattern},region.ilike.${pattern},contact.ilike.${pattern}`,
     );
   }
 
   const [{ data, error }, { data: channelRows }] = await Promise.all([
     query,
-    supabase.from("leads").select("utm_source").not("utm_source", "is", null),
+    supabase
+      .from(CONSULTATION_LEADS_TABLE)
+      .select("utm_source")
+      .not("utm_source", "is", null),
   ]);
 
   if (error) {
-    console.error("Failed to fetch leads:", error);
+    console.error("Failed to fetch consultation leads:", error);
     return NextResponse.json(
       { success: false, error: "신청자 목록을 불러오지 못했습니다." },
       { status: 500 },
@@ -66,9 +74,11 @@ export async function GET(request: Request) {
     ),
   ].sort();
 
+  const leads = ((data ?? []) as ConsultationLeadRow[]).map(mapConsultationLead);
+
   return NextResponse.json({
     success: true,
-    leads: data ?? [],
+    leads,
     channels,
   });
 }

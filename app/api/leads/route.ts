@@ -1,18 +1,13 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-const supabase =
-  SUPABASE_URL && SERVICE_ROLE_KEY
-    ? createClient(SUPABASE_URL, SERVICE_ROLE_KEY, {
-        auth: { persistSession: false },
-      })
-    : null;
+import {
+  buildContactValue,
+  CONSULTATION_LEADS_TABLE,
+} from "@/lib/consultation-leads";
+import { createServiceClient } from "@/lib/supabase/service";
 
 export async function POST(request: Request) {
   try {
+    const supabase = createServiceClient();
     if (!supabase) {
       return NextResponse.json(
         { success: false, error: "Supabase is not configured" },
@@ -32,13 +27,19 @@ export async function POST(request: Request) {
       utm_source,
       utm_medium,
       utm_campaign,
-      utm_content,
-      utm_term,
       referrer,
+      page_source,
       landing_page,
     } = body ?? {};
 
-    if (!name || !phone) {
+    const trimmedName = typeof name === "string" ? name.trim() : "";
+    const trimmedPhone = typeof phone === "string" ? phone.trim() : "";
+    const trimmedBusinessType =
+      typeof business_type === "string" ? business_type.trim() : "";
+    const trimmedRegion = typeof region === "string" ? region.trim() : "";
+    const trimmedMessage = typeof message === "string" ? message.trim() : "";
+
+    if (!trimmedName || !trimmedPhone) {
       return NextResponse.json(
         { success: false, error: "이름과 연락처는 필수입니다." },
         { status: 400 },
@@ -55,25 +56,59 @@ export async function POST(request: Request) {
       );
     }
 
-    const { error } = await supabase.from("leads").insert({
-      name,
-      phone,
-      business_type: business_type ?? null,
-      region: region ?? null,
-      message: message ?? null,
-      privacy_agreed: true,
+    const resolvedPageSource =
+      (typeof page_source === "string" ? page_source.trim() : "") ||
+      (typeof landing_page === "string" ? landing_page.trim() : "") ||
+      "landing.runwayads.kr";
+
+    const contact = buildContactValue(trimmedName, trimmedPhone);
+    const sessionKey = `landing-${crypto.randomUUID()}`;
+
+    const rawPayload = {
+      source: resolvedPageSource,
+      pageSource: resolvedPageSource,
+      privacyAgreed: true,
+      name: trimmedName,
+      phone: trimmedPhone,
+      businessType: trimmedBusinessType || "일반 상담",
+      region: trimmedRegion || "미입력",
+      message: trimmedMessage || null,
+      referrer: referrer ?? null,
       utm_source: utm_source ?? null,
       utm_medium: utm_medium ?? null,
       utm_campaign: utm_campaign ?? null,
-      utm_content: utm_content ?? null,
-      utm_term: utm_term ?? null,
+    };
+
+    const insertPayload = {
+      source: "contact_us",
+      session_key: sessionKey,
+      lead_name: trimmedName,
+      phone: trimmedPhone,
+      business_type: trimmedBusinessType || "일반 상담",
+      region: trimmedRegion || "미입력",
+      monthly_budget: "미입력",
+      goal: trimmedMessage || "상담 문의",
+      contact,
+      message: trimmedMessage || null,
+      ad_channel: null,
+      service_type: null,
+      privacy_agreed: true,
+      page_source: resolvedPageSource,
       referrer: referrer ?? null,
-      landing_page: landing_page ?? null,
-      status: "new",
-    });
+      utm_source: utm_source ?? null,
+      utm_medium: utm_medium ?? null,
+      utm_campaign: utm_campaign ?? null,
+      status: "신규",
+      admin_memo: null,
+      raw_payload: rawPayload,
+    };
+
+    const { error } = await supabase
+      .from(CONSULTATION_LEADS_TABLE)
+      .insert(insertPayload);
 
     if (error) {
-      console.error("Failed to insert lead:", error);
+      console.error("Failed to insert consultation lead:", error);
       return NextResponse.json(
         { success: false, error: "상담 신청 저장에 실패했습니다." },
         { status: 500 },
@@ -96,4 +131,3 @@ export async function GET() {
     { status: 405 },
   );
 }
-

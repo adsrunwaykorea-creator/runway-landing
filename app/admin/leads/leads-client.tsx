@@ -11,11 +11,12 @@ import {
 } from "@/lib/types/lead";
 
 const STATUS_BADGE: Record<LeadStatus, string> = {
-  new: "bg-blue-100 text-blue-800",
-  contacted: "bg-green-100 text-green-800",
-  scheduled: "bg-purple-100 text-purple-800",
-  closed: "bg-emerald-800 text-white",
-  lost: "bg-gray-200 text-gray-700",
+  신규: "bg-blue-100 text-blue-800",
+  연락완료: "bg-green-100 text-green-800",
+  상담완료: "bg-purple-100 text-purple-800",
+  계약완료: "bg-emerald-800 text-white",
+  보류: "bg-amber-100 text-amber-800",
+  부재: "bg-gray-200 text-gray-700",
 };
 
 function formatDate(iso: string) {
@@ -124,7 +125,7 @@ export default function LeadsClient() {
 
   const openMemoEdit = (lead: Lead) => {
     setEditingId(lead.id);
-    setEditMemo(lead.memo ?? "");
+    setEditMemo(lead.admin_memo ?? "");
   };
 
   const saveMemo = async (id: string) => {
@@ -133,7 +134,7 @@ export default function LeadsClient() {
       const res = await fetch(`/api/admin/leads/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ memo: editMemo }),
+        body: JSON.stringify({ admin_memo: editMemo }),
       });
       const json = (await res.json()) as {
         success: boolean;
@@ -147,7 +148,7 @@ export default function LeadsClient() {
       }
 
       setLeads((prev) =>
-        prev.map((l) => (l.id === id ? { ...l, memo: json.lead!.memo } : l)),
+        prev.map((l) => (l.id === id ? { ...l, admin_memo: json.lead!.admin_memo } : l)),
       );
       setEditingId(null);
     } catch {
@@ -284,7 +285,7 @@ export default function LeadsClient() {
                     <th className="px-4 py-3 font-medium">매장 지역</th>
                     <th className="px-4 py-3 font-medium">유입 채널</th>
                     <th className="px-4 py-3 font-medium">캠페인</th>
-                    <th className="px-4 py-3 font-medium">소재 구분</th>
+                    <th className="px-4 py-3 font-medium">광고 채널</th>
                     <th className="px-4 py-3 font-medium">문의 내용</th>
                     <th className="px-4 py-3 font-medium">상태</th>
                     <th className="px-4 py-3 font-medium">메모</th>
@@ -313,7 +314,7 @@ export default function LeadsClient() {
                       <td className="px-4 py-3">{lead.region || "-"}</td>
                       <td className="px-4 py-3">{lead.utm_source || "-"}</td>
                       <td className="px-4 py-3">{lead.utm_campaign || "-"}</td>
-                      <td className="px-4 py-3">{lead.utm_content || "-"}</td>
+                      <td className="px-4 py-3">{lead.ad_channel || "-"}</td>
                       <td className="max-w-[200px] px-4 py-3">
                         <p className="line-clamp-3 whitespace-pre-wrap">
                           {lead.message || "-"}
@@ -348,7 +349,7 @@ export default function LeadsClient() {
                           />
                         ) : (
                           <p className="line-clamp-2 text-xs text-gray-muted">
-                            {lead.memo || "-"}
+                            {lead.admin_memo || "-"}
                           </p>
                         )}
                       </td>
@@ -437,8 +438,8 @@ export default function LeadsClient() {
                       <dd>{lead.utm_campaign || "-"}</dd>
                     </div>
                     <div className="flex justify-between gap-2">
-                      <dt className="text-gray-muted">소재</dt>
-                      <dd>{lead.utm_content || "-"}</dd>
+                      <dt className="text-gray-muted">광고 채널</dt>
+                      <dd>{lead.ad_channel || "-"}</dd>
                     </div>
                   </dl>
 
@@ -507,7 +508,7 @@ export default function LeadsClient() {
                         onClick={() => openMemoEdit(lead)}
                         className="w-full rounded-[10px] border border-[#d1d5dc] py-2 text-sm text-left text-gray-muted"
                       >
-                        {lead.memo || "메모 입력"}
+                        {lead.admin_memo || "메모 입력"}
                       </button>
                     )}
                   </div>

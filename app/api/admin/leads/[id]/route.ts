@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
 import { getAdminUser } from "@/lib/auth/admin";
+import {
+  CONSULTATION_LEADS_TABLE,
+  mapConsultationLead,
+  type ConsultationLeadRow,
+} from "@/lib/consultation-leads";
 import { createServiceClient } from "@/lib/supabase/service";
 import { LEAD_STATUSES, type LeadStatus } from "@/lib/types/lead";
 
@@ -26,9 +31,9 @@ export async function PATCH(request: Request, context: RouteContext) {
 
   const { id } = await context.params;
   const body = await request.json();
-  const { status, memo } = body ?? {};
+  const { status, memo, admin_memo } = body ?? {};
 
-  const updates: { status?: LeadStatus; memo?: string | null } = {};
+  const updates: { status?: LeadStatus; admin_memo?: string | null } = {};
 
   if (status !== undefined) {
     if (!LEAD_STATUSES.includes(status)) {
@@ -40,8 +45,9 @@ export async function PATCH(request: Request, context: RouteContext) {
     updates.status = status;
   }
 
-  if (memo !== undefined) {
-    updates.memo = memo === "" ? null : String(memo);
+  const memoValue = admin_memo !== undefined ? admin_memo : memo;
+  if (memoValue !== undefined) {
+    updates.admin_memo = memoValue === "" ? null : String(memoValue);
   }
 
   if (Object.keys(updates).length === 0) {
@@ -52,19 +58,22 @@ export async function PATCH(request: Request, context: RouteContext) {
   }
 
   const { data, error } = await supabase
-    .from("leads")
+    .from(CONSULTATION_LEADS_TABLE)
     .update(updates)
     .eq("id", id)
     .select()
     .single();
 
   if (error) {
-    console.error("Failed to update lead:", error);
+    console.error("Failed to update consultation lead:", error);
     return NextResponse.json(
       { success: false, error: "저장에 실패했습니다." },
       { status: 500 },
     );
   }
 
-  return NextResponse.json({ success: true, lead: data });
+  return NextResponse.json({
+    success: true,
+    lead: mapConsultationLead(data as ConsultationLeadRow),
+  });
 }

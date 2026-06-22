@@ -1,36 +1,46 @@
-export type LeadStatus = "new" | "contacted" | "scheduled" | "closed" | "lost";
+export type LeadStatus =
+  | "신규"
+  | "연락완료"
+  | "상담완료"
+  | "계약완료"
+  | "보류"
+  | "부재";
 
 export type Lead = {
   id: string;
   created_at: string;
   name: string;
   phone: string;
-  business_type: string | null;
-  region: string | null;
+  business_type: string;
+  region: string;
+  monthly_budget: string;
+  goal: string;
+  contact: string;
+  message: string | null;
+  ad_channel: string | null;
+  page_source: string | null;
+  referrer: string | null;
   utm_source: string | null;
   utm_medium: string | null;
   utm_campaign: string | null;
-  utm_content: string | null;
-  utm_term: string | null;
-  message: string | null;
   status: LeadStatus;
-  memo: string | null;
-  referrer: string | null;
-  landing_page: string | null;
+  admin_memo: string | null;
 };
 
 export const LEAD_STATUSES: LeadStatus[] = [
-  "new",
-  "contacted",
-  "scheduled",
-  "closed",
-  "lost",
+  "신규",
+  "연락완료",
+  "상담완료",
+  "계약완료",
+  "보류",
+  "부재",
 ];
 
 export const STATUS_LABELS: Record<LeadStatus, string> = {
-  new: "신규",
-  contacted: "연락완료",
-  scheduled: "상담예약",
-  closed: "종료",
-  lost: "실패",
+  신규: "신규",
+  연락완료: "연락완료",
+  상담완료: "상담완료",
+  계약완료: "계약완료",
+  보류: "보류",
+  부재: "부재",
 };
