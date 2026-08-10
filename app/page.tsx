@@ -156,6 +156,7 @@ function PrimaryCta({
     <button
       type="button"
       onClick={onClick}
+      data-main-cta="true"
       className={`touch-manipulation w-full min-h-[52px] rounded-xl px-5 py-3.5 text-[15px] font-semibold text-white transition-opacity active:opacity-80 sm:w-auto sm:min-w-[220px] sm:text-base ${className}`}
       style={{ backgroundColor: BLUE }}
     >
@@ -259,9 +260,10 @@ function LandingPageInner() {
   }>({});
   const [referrer, setReferrer] = useState<string | null>(null);
   const [landingPage, setLandingPage] = useState<string | null>(null);
-  const [showStickyCta, setShowStickyCta] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isAnyMainCtaVisible, setIsAnyMainCtaVisible] = useState(false);
+  const [isContactFormVisible, setIsContactFormVisible] = useState(false);
   const consultationRef = useRef<HTMLElement>(null);
-  const formInViewRef = useRef(false);
   const daangnConversionTrackedRef = useRef(false);
 
   useEffect(() => {
@@ -281,33 +283,55 @@ function LandingPageInner() {
   }, []);
 
   useEffect(() => {
-    const section = consultationRef.current;
-    if (!section) return;
-
-    const updateStickyCta = () => {
-      const scrolledEnough = window.scrollY > 250;
-      setShowStickyCta(scrolledEnough && !formInViewRef.current);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 250);
     };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const ctaElements = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-main-cta="true"]'),
+    );
+    if (ctaElements.length === 0) return;
+
+    const visibility = new Map<Element, boolean>();
+    ctaElements.forEach((el) => visibility.set(el, false));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          visibility.set(entry.target, entry.isIntersecting);
+        });
+        setIsAnyMainCtaVisible([...visibility.values()].some(Boolean));
+      },
+      { threshold: 0.2 },
+    );
+
+    ctaElements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const formEl = consultationRef.current ?? document.getElementById("contact-form");
+    if (!formEl) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        formInViewRef.current = entry.isIntersecting;
-        updateStickyCta();
+        setIsContactFormVisible(entry.isIntersecting);
       },
-      { threshold: 0.2, rootMargin: "0px 0px -12% 0px" },
+      { threshold: 0.1 },
     );
 
-    observer.observe(section);
-    updateStickyCta();
-    window.addEventListener("scroll", updateStickyCta, { passive: true });
-    window.addEventListener("resize", updateStickyCta);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", updateStickyCta);
-      window.removeEventListener("resize", updateStickyCta);
-    };
+    observer.observe(formEl);
+    return () => observer.disconnect();
   }, []);
+
+  const shouldShowStickyCta =
+    isScrolled && !isAnyMainCtaVisible && !isContactFormVisible;
 
   const scrollToForm = () => {
     document.getElementById("contact-form")?.scrollIntoView({
@@ -845,17 +869,17 @@ function LandingPageInner() {
         </div>
       </Section>
 
-      {/* 스크롤 고정 CTA — 250px 이후 표시, 폼 영역에서는 숨김 */}
-      <button
-        type="button"
-        className={`sticky-cta${showStickyCta ? " is-visible" : ""}`}
-        onClick={scrollToForm}
-        aria-label="무료 상담 신청하기"
-        aria-hidden={!showStickyCta}
-        tabIndex={showStickyCta ? 0 : -1}
-      >
-        무료 상담 신청하기
-      </button>
+      {/* 스크롤 고정 CTA — 기존 CTA/폼이 보일 때는 숨김 */}
+      {shouldShowStickyCta && (
+        <button
+          type="button"
+          className="sticky-cta"
+          onClick={scrollToForm}
+          aria-label="무료 상담 신청하기"
+        >
+          무료 상담 신청하기
+        </button>
+      )}
 
       {/* Footer */}
       <footer

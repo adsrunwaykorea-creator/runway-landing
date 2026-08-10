@@ -808,24 +808,21 @@
   box-shadow:
     0 8px 24px rgba(37, 99, 235, 0.35),
     0 2px 8px rgba(15, 23, 42, 0.12);
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease,
-    background-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.sticky-cta.is-visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
+  animation: stickyCtaIn 0.25s ease forwards;
 }
 
 .sticky-cta:focus-visible {
   outline: 2px solid #1e40af;
   outline-offset: 3px;
+}
+
+@keyframes stickyCtaIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 768px) {
@@ -837,7 +834,17 @@
     height: 52px;
     border-radius: 14px;
     font-size: 16px;
-    transform: translateY(8px);
+  }
+
+  @keyframes stickyCtaIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
@@ -852,7 +859,21 @@
     padding: 12px 22px;
     border-radius: 999px;
     font-size: 15px;
-    transform: translateY(-8px);
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  @keyframes stickyCtaIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .sticky-cta:hover {
@@ -862,14 +883,11 @@
       0 12px 28px rgba(37, 99, 235, 0.4),
       0 4px 10px rgba(15, 23, 42, 0.14);
   }
-
-  .sticky-cta.is-visible:hover {
-    transform: translateY(-2px);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .sticky-cta {
-    transition: opacity 0.2s ease;
+    animation: none;
+    opacity: 1;
   }
 }
