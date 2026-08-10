@@ -61,7 +61,7 @@ const ADVANTAGES = [
 const OPERATING_METHODS = [
   {
     title: "이름·전화번호 DB 전달",
-    desc: "광고를 보고 관심 있는 고객이 이름과 전화번호를 남기면 대표님께 전달드립니다. 상담 후 예약 전환이 필요한 피부관리, 두피관리, 탈모관리, 체형관리 업종에 적합합니다.",
+    desc: "광고를 보고 관심 있는 고객이 이름과 전화번호를 남기면 대표님께 전달드립니다. 상담 후 예약 전환이 필요한 피부관리, 두피관리, SMP, 왁싱, 속눈썹, 탈모관리 업종에 적합합니다.",
   },
   {
     title: "네이버 예약페이지 연결",
@@ -69,8 +69,18 @@ const OPERATING_METHODS = [
   },
 ];
 
+const TARGET_INDUSTRIES = [
+  "피부관리",
+  "두피관리",
+  "SMP",
+  "왁싱",
+  "속눈썹",
+  "에스테틱",
+  "탈모관리",
+];
+
 const TARGET_AUDIENCE = [
-  "뷰티샵 SNS 광고를 체계적으로 운영하고 싶은 대표님",
+  "피부·두피·SMP·왁싱·속눈썹 SNS 광고를 체계적으로 운영하고 싶은 대표님",
   "광고비를 직접 결제하며 투명하게 관리하고 싶은 대표님",
   "DB 품질을 일정하게 유지하고 싶은 대표님",
   "인스타그램·유튜브 광고 세팅이 어려운 대표님",
@@ -78,7 +88,7 @@ const TARGET_AUDIENCE = [
 ];
 
 const PACKAGE_FEATURES = [
-  "뷰티 전문 SNS 광고 운영관리",
+  "뷰티업종 전문 SNS 광고 운영관리",
   "인스타그램·유튜브·네이버·당근 매체 세팅",
   "광고비는 매체 직접 결제 구조",
   "고객 DB 품질 관리",
@@ -439,24 +449,26 @@ function LandingPageInner() {
       {/* 1. 히어로 */}
       <Section className="landing-section--hero">
         <div className="landing-hero">
-          <p className="landing-hero__eyebrow">뷰티샵 SNS 광고관리</p>
+          <p className="landing-hero__eyebrow">뷰티업종 SNS 광고관리</p>
           <h1 className="landing-hero__title">
             광고비 거품 없이,
             <br />
             고객 DB 품질은 일정하게
           </h1>
           <p className="landing-hero__sub">
-            런웨이는 광고비를 직접 받지 않습니다.
+            피부·두피·SMP·왁싱·속눈썹 업종에 맞춰
             <br />
-            광고비는 인스타그램·유튜브·네이버·당근 등
+            SNS 광고를 세팅하고 운영합니다.
             <br />
-            광고 매체에 대표님이 직접 결제하는 구조입니다.
+            광고비는 대표님이 매체에 직접 결제하고,
+            <br />
+            런웨이는 월 관리비만 받습니다.
           </p>
           <div className="hero-price-callout">
             <p className="hero-price-callout__amount">
               월 <span className="hero-price-callout__price">399,000원</span>
             </p>
-            <p className="hero-price-callout__tagline">뷰티 전문 SNS 광고관리</p>
+            <p className="hero-price-callout__tagline">뷰티업종 전문 SNS 광고관리</p>
             <p className="hero-price-callout__note">VAT 별도 / 광고비 별도</p>
           </div>
           <div className="landing-hero__cta">
@@ -470,8 +482,31 @@ function LandingPageInner() {
         </div>
       </Section>
 
-      {/* 2. 문제 공감 */}
+      {/* 2. 적합 업종 */}
       <Section style={{ backgroundColor: BLUE_LIGHT }}>
+        <SectionTitle>이런 업종에 적합합니다</SectionTitle>
+        <div className="landing-content">
+          <ul className="mt-0 flex flex-wrap justify-center gap-2 sm:gap-2.5">
+            {TARGET_INDUSTRIES.map((item) => (
+              <li
+                key={item}
+                className="rounded-full border-2 bg-white px-3.5 py-2 text-[14px] font-bold text-[#1e40af] sm:px-4 sm:py-2.5 sm:text-[15px]"
+                style={{ borderColor: "#93c5fd" }}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p className="landing-body-text mt-5 sm:mt-6">
+            상담 후 예약 전환이 중요한 뷰티업종에 맞춰
+            <br />
+            고객 DB 수집 또는 네이버 예약페이지 연결 방식으로 운영합니다.
+          </p>
+        </div>
+      </Section>
+
+      {/* 3. 문제 공감 */}
+      <Section>
         <SectionTitle>이런 고민이 있으신가요?</SectionTitle>
         <ul className="landing-list landing-card-list">
           {PROBLEMS.map((item, index) => (
@@ -659,12 +694,12 @@ function LandingPageInner() {
         <SectionTitle>
           광고비 거품 없이
           <br />
-          뷰티샵 SNS 광고를 운영하세요
+          뷰티업종 SNS 광고를 운영하세요
         </SectionTitle>
         <div className="landing-content">
           <div className="landing-card landing-card--accent p-5 sm:p-8">
             <p className="break-keep text-center text-base font-semibold sm:text-lg">
-              뷰티 전문 SNS 광고관리
+              뷰티업종(피부·두피·SMP·왁싱·속눈썹) 전문 광고관리
             </p>
             <p className="mt-3 text-center sm:mt-4">
               <span className="text-[1.65rem] font-bold sm:text-4xl" style={{ color: BLUE_DARK }}>
@@ -718,7 +753,7 @@ function LandingPageInner() {
           <p className="mt-4 break-keep text-[15px] font-medium leading-relaxed text-[#475569] sm:mt-5 sm:text-base">
             업종, 예산, 현재 상황을 남겨주시면
             <br />
-            뷰티샵에 맞는 광고 운영 방향을 안내드립니다.
+            피부·두피·SMP·왁싱·속눈썹에 맞는 광고 운영 방향을 안내드립니다.
           </p>
           <p className="landing-body-text mt-2 sm:mt-3">
             런웨이는 광고비를 직접 받지 않습니다.
@@ -891,7 +926,7 @@ function LandingPageInner() {
       >
         <div className="landing-container">
           <p className="text-lg font-medium text-white">런웨이 광고대행사</p>
-          <p className="mt-2 text-sm text-[#99a1af]">뷰티샵 SNS 광고관리 파트너</p>
+          <p className="mt-2 text-sm text-[#99a1af]">뷰티업종 SNS 광고관리 파트너</p>
           <div className="mt-6 space-y-1 text-xs text-[#99a1af]">
             <p>사업자등록번호: 326-02-03126</p>
             <p>통신판매신고: 제 2026-서울영등포-1088 호</p>

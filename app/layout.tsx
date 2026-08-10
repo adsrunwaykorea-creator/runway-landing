@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "런웨이 | 뷰티샵 SNS 광고관리",
+  title: "런웨이 | 뷰티업종 SNS 광고관리",
   description:
-    "월 399,000원 뷰티 전문 SNS 광고관리. 광고비 거품 없이, 고객 DB 품질은 일정하게. 광고비는 매체에 직접 결제하고 런웨이는 월 관리비만 받습니다.",
+    "월 399,000원 뷰티업종(피부·두피·SMP·왁싱·속눈썹) 전문 SNS 광고관리. 광고비 거품 없이, 고객 DB 품질은 일정하게. 광고비는 매체에 직접 결제하고 런웨이는 월 관리비만 받습니다.",
 };
 
 export const viewport: Viewport = {
