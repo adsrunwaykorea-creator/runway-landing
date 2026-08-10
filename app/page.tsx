@@ -11,11 +11,11 @@ const BLUE_LIGHT = "#eff6ff";
 const NAVY = "#0a1628";
 
 const PROBLEMS = [
-  "어떤 광고 매체부터 시작할지 모르겠어요",
-  "광고 매체별 세팅 방법이 어려워요",
-  "사내 마케터 채용 비용이 부담스러워요",
-  "바빠서 광고까지 직접 챙기기 어려워요",
-  "광고가 제대로 운영되는지 판단하기 어려워요",
+  "광고비를 냈는데 어디에 쓰였는지 모르겠어요",
+  "광고대행사에 광고비까지 맡기는 게 불안해요",
+  "DB는 들어오는데 품질이 들쭉날쭉해요",
+  "인스타그램·유튜브 광고 세팅이 어렵습니다",
+  "광고를 해도 예약이나 상담으로 연결이 안 됩니다",
 ];
 
 const PERFORMANCE_BEFORE = [
@@ -34,9 +34,9 @@ const PERFORMANCE_AFTER = [
 
 const BEFORE_NOTES = ["자연 유입량이 매우 적은", "낮은 예약 전환율", "지역 내 노출 부족"];
 const AFTER_NOTES = [
-  "광고비는 투명하게 관리되고, 성과는 숫자로 확인됩니다.",
-  "전문 마케터가 매월 소재·타깃·예산을 직접 점검합니다.",
-  "문의, 예약, 방문까지 이어지는 실전형 마케팅을 운영합니다.",
+  "광고비는 매체에 직접 결제되어 사용처가 투명합니다.",
+  "광고 매체를 직접 설정해 DB 품질을 일정하게 유지합니다.",
+  "문의, 예약, 방문까지 이어지는 실전형 광고 운영관리입니다.",
 ];
 
 const OTHER_PERFORMANCE = [
@@ -47,50 +47,42 @@ const OTHER_PERFORMANCE = [
   "네이버 플레이스 유입 +135% 달성",
 ];
 
-const SERVICE_CARDS = [
+const ADVANTAGES = [
   {
-    title: "최초 1회 마케팅 컨설팅 상담",
-    desc: "업종·예산에 맞는 광고 시작 방향 제안",
+    title: "광고비에 거품이 없습니다",
+    desc: "광고비는 대표님이 인스타그램·유튜브·네이버·당근 등 광고 매체에 직접 결제합니다. 그래서 광고비가 어디에 사용되는지 직접 확인할 수 있고, 불필요한 중간 마진 없이 광고비가 실제 매체에 사용됩니다.",
   },
   {
-    title: "1개월간 매체 2곳 광고 대행",
-    desc: "광고 운영과 성과 보고서 전달 포함",
-  },
-  {
-    title: "광고 운영 보고서 전달",
-    desc: "성과를 숫자로 확인할 수 있게 정리",
-  },
-  {
-    title: "매체 확장 운영 가능",
-    desc: "필요 시 여러 매체로 확장 운영",
+    title: "DB 품질이 일정하게 유지됩니다",
+    desc: "런웨이는 광고 매체를 직접 설정해 운영합니다. 고객 DB는 출처가 불분명한 정보가 아니라, 대표님이 광고비를 지불한 매체에서 광고를 보고 직접 신청한 고객 정보만 유입됩니다.",
   },
 ];
 
-const MEDIA_ITEMS = [
-  "검색 포털 광고",
-  "당근마켓 광고",
-  "구글 검색·디스플레이·유튜브",
-  "메타 이미지·릴스 광고",
-  "카카오 검색·디스플레이",
-  "오픈마켓 광고",
-  "앱 내 광고",
-  "CRM 메시지",
+const OPERATING_METHODS = [
+  {
+    title: "이름·전화번호 DB 전달",
+    desc: "광고를 보고 관심 있는 고객이 이름과 전화번호를 남기면 대표님께 전달드립니다. 상담 후 예약 전환이 필요한 피부관리, 두피관리, 탈모관리, 체형관리 업종에 적합합니다.",
+  },
+  {
+    title: "네이버 예약페이지 연결",
+    desc: "광고를 클릭한 고객을 대표님 네이버 예약페이지나 홈페이지로 바로 연결합니다. 예약페이지가 잘 정리되어 있고, 바로 예약을 유도하고 싶은 매장에 적합합니다.",
+  },
 ];
 
 const TARGET_AUDIENCE = [
-  "어디서부터 마케팅을 시작할지 막막한 사장님",
-  "광고 세팅 방법을 몰라 운영이 어려운 사장님",
-  "사내 마케터 채용 비용이 부담스러운 사장님",
-  "광고는 맡기고 사업 운영에 집중하고 싶은 사장님",
-  "작게 시작해서 광고 방향을 잡고 싶은 사장님",
+  "뷰티샵 SNS 광고를 체계적으로 운영하고 싶은 대표님",
+  "광고비를 직접 결제하며 투명하게 관리하고 싶은 대표님",
+  "DB 품질을 일정하게 유지하고 싶은 대표님",
+  "인스타그램·유튜브 광고 세팅이 어려운 대표님",
+  "광고를 예약·상담으로 연결하고 싶은 대표님",
 ];
 
 const PACKAGE_FEATURES = [
-  "최초 1회 마케팅 컨설팅 상담",
-  "매체 2곳 광고 운영",
-  "광고 세팅 및 운영관리",
+  "뷰티 전문 SNS 광고 운영관리",
+  "인스타그램·유튜브·네이버·당근 매체 세팅",
+  "광고비는 매체 직접 결제 구조",
+  "고객 DB 품질 관리",
   "광고 성과 보고서 전달",
-  "매체 확장 운영 상담",
 ];
 
 type LeadPayload = {
@@ -126,12 +118,33 @@ function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function SectionTitle({ children }: { children: React.ReactNode }) {
+function Section({
+  children,
+  className = "",
+  style,
+  id,
+  sectionRef,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  id?: string;
+  sectionRef?: React.RefObject<HTMLElement | null>;
+}) {
   return (
-    <h2 className="break-keep text-center text-base font-semibold leading-snug sm:text-xl">
-      {children}
-    </h2>
+    <section
+      ref={sectionRef}
+      id={id}
+      className={`landing-section ${className}`}
+      style={style}
+    >
+      <div className="landing-container">{children}</div>
+    </section>
   );
+}
+
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return <h2 className="landing-section-title">{children}</h2>;
 }
 
 function PrimaryCta({
@@ -334,302 +347,266 @@ function LandingPageInner() {
 
   return (
     <div className="min-h-screen bg-white pb-[calc(5.5rem+env(safe-area-inset-bottom))] text-[#0f172a] sm:pb-0">
-      {/* 1. 히어로 — 모바일 첫 화면: 카피 + 가격 + CTA 우선 */}
-      <section className="px-4 pb-8 pt-[max(1.25rem,env(safe-area-inset-top))] sm:px-6 sm:pb-12 sm:pt-12">
-        <div className="mx-auto max-w-lg text-center">
-          <p className="text-[13px] font-medium sm:text-sm" style={{ color: BLUE }}>
-            소상공인 광고관리
-          </p>
-          <h1 className="mt-2.5 break-keep text-[1.2rem] font-semibold leading-[1.45] sm:mt-3 sm:text-2xl sm:leading-snug">
-            온라인 마케팅을 시작하고 싶은데
+      {/* 1. 히어로 */}
+      <Section className="landing-section--hero">
+        <div className="landing-hero">
+          <p className="landing-hero__eyebrow">뷰티샵 SNS 광고관리</p>
+          <h1 className="landing-hero__title">
+            광고비 거품 없이,
             <br />
-            방법을 모르시나요?
+            고객 DB 품질은 일정하게
           </h1>
-          <p className="mt-2.5 break-keep text-[13px] leading-relaxed text-[#64748b] sm:mt-3 sm:text-sm">
-            사내에 마케터를 고용하기에는
+          <p className="landing-hero__sub">
+            런웨이는 광고비를 직접 받지 않습니다.
             <br />
-            비용이 부담스러우신가요?
+            광고비는 인스타그램·유튜브·네이버·당근 등
+            <br />
+            광고 매체에 대표님이 직접 결제하는 구조입니다.
           </p>
-          <div className="hero-price-callout mx-auto mt-4 max-w-sm sm:mt-5">
+          <div className="hero-price-callout">
             <p className="hero-price-callout__amount">
-              월 <span className="hero-price-callout__price">330,000원</span>
+              월 <span className="hero-price-callout__price">399,000원</span>
             </p>
-            <p className="hero-price-callout__tagline">전문 마케터를 구독하세요</p>
+            <p className="hero-price-callout__tagline">뷰티 전문 SNS 광고관리</p>
+            <p className="hero-price-callout__note">VAT 별도 / 광고비 별도</p>
           </div>
-          <div className="mt-6 flex flex-col gap-2 sm:mt-7 sm:flex-row sm:justify-center sm:gap-2.5">
+          <div className="landing-hero__cta">
             <PrimaryCta onClick={scrollToForm}>무료 상담 신청하기</PrimaryCta>
           </div>
-          <p className="mt-4 break-keep text-[13px] font-semibold leading-relaxed text-[#475569] sm:mt-5 sm:text-sm">
-            9년차 퍼포먼스 마케터가
+          <p className="landing-hero__trust">
+            광고비는 매체에 직접 결제,
             <br />
-            광고 세팅부터 운영, 보고서까지 도와드립니다.
-          </p>
-          <p className="mt-2 break-keep text-[12px] leading-relaxed text-[#64748b] sm:text-sm">
-            5번의 인하우스 마케팅 경험으로
-            <br />
-            고객님의 광고 고민을 해결해드리겠습니다.
+            런웨이는 월 관리비만 받습니다.
           </p>
         </div>
-      </section>
+      </Section>
 
       {/* 2. 문제 공감 */}
-      <section className="px-4 py-10 sm:px-6 sm:py-12" style={{ backgroundColor: BLUE_LIGHT }}>
-        <div className="mx-auto max-w-lg">
-          <SectionTitle>이런 고민이 있으신가요?</SectionTitle>
-          <ul className="compact-card-list mt-5 space-y-2 sm:mt-6 sm:space-y-2.5">
-            {PROBLEMS.map((item, index) => (
-              <li
-                key={item}
-                className="compact-card flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 shadow-sm sm:gap-3 sm:px-4 sm:py-3"
-              >
-                <ProblemCheck delayMs={index * 250} />
-                <span className="problem-card__text min-w-0 flex-1 text-[13px] font-bold leading-none text-[#1e293b] sm:text-[15px]">
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p
-            className="mt-5 break-keep text-center text-[13px] font-semibold leading-relaxed sm:mt-6 sm:text-sm"
-            style={{ color: BLUE_DARK }}
-          >
-            그렇다면 런웨이가
-            <br />
-            광고 운영의 시작을 도와드리겠습니다.
-          </p>
-        </div>
-      </section>
+      <Section style={{ backgroundColor: BLUE_LIGHT }}>
+        <SectionTitle>이런 고민이 있으신가요?</SectionTitle>
+        <ul className="landing-list landing-card-list">
+          {PROBLEMS.map((item, index) => (
+            <li key={item} className="landing-card landing-card--soft landing-card--row">
+              <ProblemCheck delayMs={index * 250} />
+              <span className="landing-card__text">{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p
+          className="landing-content mt-6 break-keep text-center text-[15px] font-semibold leading-relaxed sm:mt-8 sm:text-base"
+          style={{ color: BLUE_DARK }}
+        >
+          그렇다면 런웨이가
+          <br />
+          투명한 광고 운영관리로 도와드리겠습니다.
+        </p>
+      </Section>
 
       {/* 3. 마케팅 성과 */}
-      <section className="px-4 py-10 sm:px-6 sm:py-12">
-        <div className="mx-auto max-w-6xl">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-medium text-[#64748b] sm:text-base">
-              실제 사례로 증명합니다.
-            </p>
-            <p
-              className="mt-3 break-keep text-[1.05rem] font-bold leading-snug sm:mt-4 sm:text-2xl"
-              style={{ color: BLUE_DARK }}
-            >
-              M 뷰티 프랜차이즈 기준 월 예약 신청이
-              <br />
-              <span className="headline-stat-highlight text-[1.25rem] sm:text-3xl">
-                <svg
-                  className="headline-stat-highlight__star"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <span className="headline-stat-highlight__text">7.4배 증가했습니다.</span>
-              </span>
-            </p>
-          </div>
-          <p className="mt-3 break-keep text-center text-[13px] leading-relaxed text-[#64748b] sm:text-sm">
+      <Section>
+        <div className="landing-content text-center">
+          <p className="text-[15px] font-medium text-[#64748b] sm:text-base">
+            실제 사례로 증명합니다.
+          </p>
+          <p
+            className="mt-3 break-keep text-[1.15rem] font-bold leading-snug sm:mt-4 sm:text-2xl"
+            style={{ color: BLUE_DARK }}
+          >
+            M 뷰티 프랜차이즈 기준 월 예약 신청이
+            <br />
+            <span className="headline-stat-highlight text-[1.35rem] sm:text-3xl">
+              <svg
+                className="headline-stat-highlight__star"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              <span className="headline-stat-highlight__text">7.4배 증가했습니다.</span>
+            </span>
+          </p>
+          <p className="landing-body-text mt-3">
             지역 타겟팅의 효과는 숫자로 나타납니다. 두피/탈모 브랜드의 실제 운영 데이터입니다.
           </p>
+        </div>
 
-          <div className="mt-6 grid gap-4 sm:mt-8 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
-            <article className="rounded-2xl border border-[#e2e8f0] bg-white p-4 shadow-sm sm:p-6">
-              <h3 className="text-center text-lg font-extrabold tracking-tight text-[#1e293b] sm:text-2xl">
-                대표님 직접 운영
-              </h3>
-              <p className="mx-auto mt-2 w-fit rounded-full bg-[#f1f5f9] px-3 py-1 text-xs text-[#64748b]">
-                2025년 3월
-              </p>
-              <ul className="mt-5 divide-y divide-[#eef2f7]">
-                {PERFORMANCE_BEFORE.map((item) => (
-                  <li key={item.label} className="py-3 text-center sm:py-4">
-                    <p className="text-3xl font-bold text-[#334155] sm:text-4xl">{item.value}</p>
-                    <p className="mt-1 text-xs text-[#64748b] sm:text-sm">{item.label}</p>
-                  </li>
-                ))}
-              </ul>
-              <ul className="mt-4 space-y-1 rounded-lg bg-[#f8fafc] p-3 text-xs text-[#64748b] sm:text-sm">
-                {BEFORE_NOTES.map((note) => (
-                  <li key={note}>✖ {note}</li>
-                ))}
-              </ul>
-            </article>
-
-            <div className="hidden lg:block text-center">
-              <p className="text-xs text-[#64748b]">런웨이 지역 타겟팅</p>
-              <p className="text-3xl font-bold" style={{ color: BLUE }}>
-                →
-              </p>
-            </div>
-
-            <article className="animated-highlight-border rounded-2xl border-2 bg-white p-4 shadow-sm sm:p-6">
-              <h3
-                className="text-center text-lg font-extrabold tracking-tight sm:text-2xl"
-                style={{ color: BLUE_DARK }}
-              >
-                런웨이 운영 후
-              </h3>
-              <p className="performance-after-channel mx-auto mt-2 text-center text-[14px] sm:text-[16px]">
-                당근 + 인스타 광고 운영
-              </p>
-              <p
-                className="mx-auto mt-2 w-fit rounded-full px-3 py-1 text-xs text-white"
-                style={{ backgroundColor: BLUE }}
-              >
-                2025년 12월
-              </p>
-              <ul className="mt-5 divide-y divide-[#eef2f7]">
-                {PERFORMANCE_AFTER.map((item) => (
-                  <li key={item.label} className="py-3 text-center sm:py-4">
-                    <p className="text-3xl font-bold sm:text-4xl" style={{ color: BLUE }}>
-                      {item.value}
-                    </p>
-                    <p className="mt-1 text-xs text-[#334155] sm:text-sm">
-                      {item.label} <span className="text-[#64748b]">({item.change})</span>
-                    </p>
-                  </li>
-                ))}
-              </ul>
-              <ul className="mt-4 space-y-1 rounded-lg bg-[#eff6ff] p-3 text-xs text-[#334155] sm:text-sm">
-                {AFTER_NOTES.map((note) => (
-                  <li key={note}>☑ {note}</li>
-                ))}
-              </ul>
-            </article>
-          </div>
-
-          <p className="mt-5 break-keep text-center text-[13px] leading-relaxed text-[#64748b] sm:text-sm">
-            런웨이는 감으로만 광고를 운영하지 않습니다.
-            <br />
-            실제 운영 경험과 성과 데이터를 기준으로
-            <br />
-            광고 방향을 제안합니다.
-          </p>
-
-          <div className="animated-highlight-border mt-8 rounded-2xl border-2 bg-[#f8fbff] p-4 sm:p-5">
-            <h3 className="text-center text-sm font-bold text-[#334155] sm:text-base">
-              마케팅 성과
+        <div className="landing-compare mt-6 sm:mt-8">
+          <article className="landing-card landing-compare__card">
+            <h3 className="text-center text-lg font-extrabold tracking-tight text-[#1e293b] sm:text-2xl">
+              대표님 직접 운영
             </h3>
-            <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
-              {OTHER_PERFORMANCE.map((item) => (
-                <li
-                  key={item}
-                  className="break-keep rounded-xl border-2 bg-white px-3.5 py-3.5 text-center text-[13px] font-medium text-[#334155] shadow-sm sm:px-4 sm:py-4 sm:text-sm"
-                  style={{ borderColor: "#93c5fd" }}
-                >
-                  {formatPerformanceLine(item)}
+            <p className="mx-auto mt-2 w-fit rounded-full bg-[#f1f5f9] px-3 py-1 text-xs text-[#64748b] sm:text-sm">
+              2025년 3월
+            </p>
+            <ul className="mt-5 divide-y divide-[#eef2f7]">
+              {PERFORMANCE_BEFORE.map((item) => (
+                <li key={item.label} className="py-3 text-center sm:py-4">
+                  <p className="text-3xl font-bold text-[#334155] sm:text-4xl">{item.value}</p>
+                  <p className="landing-compare__label">{item.label}</p>
                 </li>
               ))}
             </ul>
+            <ul className="landing-compare__notes space-y-1 bg-[#f8fafc] text-[#64748b]">
+              {BEFORE_NOTES.map((note) => (
+                <li key={note}>✖ {note}</li>
+              ))}
+            </ul>
+          </article>
+
+          <div className="hidden items-center justify-center text-center lg:flex lg:flex-col">
+            <p className="text-sm text-[#64748b]">런웨이 지역 타겟팅</p>
+            <p className="text-3xl font-bold" style={{ color: BLUE }}>
+              →
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* 4. 서비스 제공 내역 */}
-      <section className="px-4 py-10 sm:px-6 sm:py-12" style={{ backgroundColor: BLUE_LIGHT }}>
-        <div className="mx-auto max-w-lg">
-          <SectionTitle>런웨이는 이렇게 도와드립니다</SectionTitle>
-          <ul className="compact-card-list mt-5 space-y-2 sm:mt-6 sm:space-y-2.5">
-            {SERVICE_CARDS.map((card, index) => (
-              <li
-                key={card.title}
-                className="compact-card flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 shadow-sm sm:gap-3 sm:px-4 sm:py-3"
-              >
-                <span
-                  className="flex size-6 shrink-0 items-center justify-center rounded-md text-[11px] font-bold text-white sm:size-7 sm:text-xs"
-                  style={{ backgroundColor: BLUE }}
-                >
-                  {index + 1}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="problem-card__text text-[13px] font-bold leading-none text-[#1e293b] sm:text-[15px]">
-                    {card.title}
+          <article className="landing-card landing-compare__card animated-highlight-border border-2">
+            <h3
+              className="text-center text-lg font-extrabold tracking-tight sm:text-2xl"
+              style={{ color: BLUE_DARK }}
+            >
+              런웨이 운영 후
+            </h3>
+            <p className="performance-after-channel mx-auto mt-2 text-center text-[15px] sm:text-base">
+              당근 + 인스타 광고 운영
+            </p>
+            <p
+              className="mx-auto mt-2 w-fit rounded-full px-3 py-1 text-xs text-white sm:text-sm"
+              style={{ backgroundColor: BLUE }}
+            >
+              2025년 12월
+            </p>
+            <ul className="mt-5 divide-y divide-[#eef2f7]">
+              {PERFORMANCE_AFTER.map((item) => (
+                <li key={item.label} className="py-3 text-center sm:py-4">
+                  <p className="text-3xl font-bold sm:text-4xl" style={{ color: BLUE }}>
+                    {item.value}
                   </p>
-                  <p className="problem-card__text mt-1 text-[12px] font-medium leading-none text-[#64748b] sm:text-[13px]">
-                    {card.desc}
+                  <p className="landing-compare__label text-[#334155]">
+                    {item.label} <span className="text-[#64748b]">({item.change})</span>
                   </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+            <ul className="landing-compare__notes space-y-1 bg-[#eff6ff] text-[#334155]">
+              {AFTER_NOTES.map((note) => (
+                <li key={note}>☑ {note}</li>
+              ))}
+            </ul>
+          </article>
         </div>
-      </section>
 
-      {/* 5. 대행 가능 매체 — 모바일: 2열 그리드 칩 */}
-      <section className="px-4 py-10 sm:px-6 sm:py-12">
-        <div className="mx-auto max-w-lg">
-          <SectionTitle>다양한 광고 매체를 운영할 수 있습니다</SectionTitle>
-          <p className="mt-3 break-keep text-center text-[13px] leading-relaxed text-[#64748b] sm:text-sm">
-            업종과 예산에 맞춰 필요한 매체를 선택합니다.
-            <br />
-            현재 상황에 맞는 매체부터 시작하는 것이 중요합니다.
-          </p>
-          <ul className="mt-5 grid grid-cols-2 gap-2 sm:mt-6 sm:flex sm:flex-wrap sm:justify-center sm:gap-2">
-            {MEDIA_ITEMS.map((item) => (
+        <p className="landing-content landing-body-text mt-6 sm:mt-8">
+          런웨이는 감으로만 광고를 운영하지 않습니다.
+          <br />
+          실제 운영 경험과 성과 데이터를 기준으로
+          <br />
+          광고 방향을 제안합니다.
+        </p>
+
+        <div className="landing-content animated-highlight-border mt-8 rounded-2xl border-2 bg-[#f8fbff] p-4 sm:p-5">
+          <h3 className="text-center text-base font-bold text-[#334155] sm:text-lg">
+            마케팅 성과
+          </h3>
+          <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
+            {OTHER_PERFORMANCE.map((item) => (
               <li
                 key={item}
-                className="media-chip break-keep rounded-xl border-2 px-2.5 py-2.5 text-center text-[11px] font-bold leading-snug sm:rounded-full sm:px-3.5 sm:py-2.5 sm:text-sm"
+                className="landing-card break-keep px-3.5 py-3.5 text-center text-[15px] font-medium text-[#334155] sm:px-4 sm:py-4 sm:text-base"
+                style={{ borderColor: "#93c5fd", borderWidth: 2 }}
               >
-                {item}
+                {formatPerformanceLine(item)}
               </li>
             ))}
           </ul>
         </div>
-      </section>
+      </Section>
+
+      {/* 4. 핵심 장점 */}
+      <Section style={{ backgroundColor: BLUE_LIGHT }}>
+        <SectionTitle>런웨이가 광고비를 직접 받지 않는 이유</SectionTitle>
+        <ul className="landing-content landing-card-list">
+          {ADVANTAGES.map((card, index) => (
+            <li key={card.title} className="landing-card landing-card--soft landing-card--stack">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <span className="landing-card__index">{index + 1}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="landing-card__title">{card.title}</p>
+                  <p className="landing-card__desc">{card.desc}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* 5. 고객 모으는 방식 */}
+      <Section>
+        <SectionTitle>고객을 모으는 방식은 두 가지입니다</SectionTitle>
+        <ul className="landing-content landing-card-list">
+          {OPERATING_METHODS.map((card, index) => (
+            <li key={card.title} className="landing-card landing-card--stack">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <span className="landing-card__index">{index + 1}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="landing-card__title">{card.title}</p>
+                  <p className="landing-card__desc">{card.desc}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Section>
 
       {/* 6. 효과적인 대상 */}
-      <section className="px-4 py-10 sm:px-6 sm:py-12" style={{ backgroundColor: BLUE_LIGHT }}>
-        <div className="mx-auto max-w-lg">
-          <SectionTitle>이런 분에게 효과적입니다</SectionTitle>
-          <ul className="compact-card-list mt-5 space-y-2 sm:mt-6 sm:space-y-2.5">
-            {TARGET_AUDIENCE.map((item) => (
-              <li
-                key={item}
-                className="compact-card flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 shadow-sm sm:gap-3 sm:px-4 sm:py-3"
+      <Section style={{ backgroundColor: BLUE_LIGHT }}>
+        <SectionTitle>이런 분에게 효과적입니다</SectionTitle>
+        <ul className="landing-list landing-card-list">
+          {TARGET_AUDIENCE.map((item) => (
+            <li key={item} className="landing-card landing-card--soft landing-card--row">
+              <span
+                className="shrink-0 text-base font-bold leading-none sm:text-lg"
+                style={{ color: BLUE }}
               >
-                <span className="shrink-0 text-[15px] font-bold leading-none sm:text-base" style={{ color: BLUE }}>
-                  ·
-                </span>
-                <span className="problem-card__text min-w-0 flex-1 text-[13px] font-bold leading-none text-[#1e293b] sm:text-[15px]">
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+                ·
+              </span>
+              <span className="landing-card__text">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </Section>
 
       {/* 7. 가격 */}
-      <section className="px-4 py-10 sm:px-6 sm:py-12">
-        <div className="mx-auto max-w-lg">
-          <SectionTitle>
-            전문 마케터 채용이 부담스럽다면
-            <br />
-            먼저 런웨이로 시작하세요
-          </SectionTitle>
-          <div
-            className="mt-5 rounded-2xl border-2 bg-white p-5 shadow-sm sm:mt-6 sm:p-8"
-            style={{ borderColor: BLUE }}
-          >
-            <p className="break-keep text-center text-[15px] font-semibold sm:text-lg">
-              런웨이 SNS 광고관리 베이직
+      <Section>
+        <SectionTitle>
+          광고비 거품 없이
+          <br />
+          뷰티샵 SNS 광고를 운영하세요
+        </SectionTitle>
+        <div className="landing-content">
+          <div className="landing-card landing-card--accent p-5 sm:p-8">
+            <p className="break-keep text-center text-base font-semibold sm:text-lg">
+              뷰티 전문 SNS 광고관리
             </p>
             <p className="mt-3 text-center sm:mt-4">
               <span className="text-[1.65rem] font-bold sm:text-4xl" style={{ color: BLUE_DARK }}>
-                월 330,000원부터
+                월 399,000원
               </span>
-              <span className="mt-1 block text-[13px] font-medium text-[#475569] sm:text-sm">
-                전문 마케터 구독
+              <span className="mt-1 block text-[15px] font-medium text-[#475569] sm:text-base">
+                월 관리비 · 광고비 별도
               </span>
             </p>
-            <p className="mt-3 break-keep text-center text-[13px] leading-relaxed text-[#64748b] sm:mt-4 sm:text-sm">
-              필요한 광고 운영을 작게 시작하고,
+            <p className="landing-body-text mt-3 sm:mt-4">
+              광고비는 매체에 직접 결제하고,
               <br />
-              성과와 예산에 따라 매체를 확장할 수 있습니다.
+              런웨이는 광고 운영관리만 담당합니다.
             </p>
             <ul className="mt-4 space-y-1.5 sm:mt-5 sm:space-y-2">
               {PACKAGE_FEATURES.map((feature) => (
                 <li
                   key={feature}
-                  className="flex items-center gap-2 rounded-lg px-3 py-2 text-[13px] sm:gap-2.5 sm:py-2.5 sm:text-sm"
+                  className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-[15px] sm:gap-2.5 sm:py-3 sm:text-base"
                   style={{ backgroundColor: BLUE_LIGHT }}
                 >
                   <span className="shrink-0 font-bold" style={{ color: BLUE }}>
@@ -639,58 +616,60 @@ function LandingPageInner() {
                 </li>
               ))}
             </ul>
-            <p className="mt-3 break-keep text-center text-[11px] leading-relaxed text-[#94a3b8] sm:mt-4 sm:text-xs">
+            <p className="mt-3 break-keep text-center text-xs leading-relaxed text-[#94a3b8] sm:mt-4 sm:text-sm">
+              VAT 별도 / 광고비 별도
+              <br />
               운영 매체 수, 광고 예산, 업무 범위에 따라
               <br />
               최종 견적은 달라질 수 있습니다.
             </p>
-            <div className="mt-5 flex flex-col gap-2 sm:mt-6 sm:gap-2.5">
+            <div className="mt-5 flex justify-center sm:mt-6">
               <PrimaryCta onClick={scrollToForm}>무료 상담 신청하기</PrimaryCta>
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* 8. 마지막 CTA */}
-      <section className="px-4 py-10 sm:px-6 sm:py-12" style={{ backgroundColor: BLUE_LIGHT }}>
-        <div className="mx-auto max-w-lg text-center">
-          <h2 className="break-keep text-center text-lg font-bold leading-snug text-[#0f172a] sm:text-2xl">
-            온라인 마케팅,
+      <Section style={{ backgroundColor: BLUE_LIGHT }}>
+        <div className="landing-content text-center">
+          <h2 className="landing-section-title">
+            광고비는 투명하게,
             <br />
-            이제 혼자 고민하지 마세요
+            DB 품질은 일정하게
           </h2>
-          <p className="mt-3 break-keep text-[14px] font-medium leading-relaxed text-[#475569] sm:mt-4 sm:text-[15px]">
+          <p className="mt-4 break-keep text-[15px] font-medium leading-relaxed text-[#475569] sm:mt-5 sm:text-base">
             업종, 예산, 현재 상황을 남겨주시면
             <br />
-            어떤 광고부터 시작하면 좋을지 안내드리겠습니다.
+            뷰티샵에 맞는 광고 운영 방향을 안내드립니다.
           </p>
-          <p className="mt-2 break-keep text-[13px] leading-relaxed text-[#64748b] sm:mt-3 sm:text-sm">
-            광고를 처음 시작하는 사장님도 이해할 수 있도록
+          <p className="landing-body-text mt-2 sm:mt-3">
+            런웨이는 광고비를 직접 받지 않습니다.
             <br />
-            쉽고 현실적인 방향으로 상담해드립니다.
+            매체 직접 결제 구조로 광고 운영을 상담해드립니다.
           </p>
-          <div className="mt-5 flex justify-center sm:mt-6">
-            <PrimaryCta onClick={scrollToForm}>무료 상담 신청하기</PrimaryCta>
+          <div className="mt-6 flex justify-center sm:mt-7">
+            <PrimaryCta onClick={scrollToForm}>광고 운영 상담받기</PrimaryCta>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* 9. 상담신청 폼 */}
-      <section
-        ref={consultationRef}
+      <Section
+        sectionRef={consultationRef}
         id="consultation"
-        className="scroll-mt-3 px-4 py-10 sm:scroll-mt-4 sm:px-6 sm:py-12"
+        className="scroll-mt-3 sm:scroll-mt-4"
       >
-        <div className="mx-auto max-w-xl">
-          <h2 className="text-center text-lg font-semibold sm:text-2xl">상담 신청</h2>
-          <p className="mt-2 text-center text-[13px] text-[#64748b] sm:text-sm">
+        <div className="landing-form-wrap">
+          <h2 className="landing-section-title">상담 신청</h2>
+          <p className="mt-2 text-center text-[15px] text-[#64748b] sm:text-base">
             간단한 정보를 입력해주세요
           </p>
 
           <form
             id="consultation-form"
             onSubmit={handleFormSubmit}
-            className="mt-6 space-y-4 rounded-2xl border border-[#e2e8f0] bg-white p-4 shadow-sm sm:mt-8 sm:space-y-5 sm:p-8"
+            className="landing-card mt-6 space-y-4 p-4 sm:mt-8 sm:space-y-5 sm:p-8"
           >
             <div>
               <label htmlFor="name" className="mb-2 block text-sm font-medium text-[#364153]">
@@ -811,7 +790,7 @@ function LandingPageInner() {
             </button>
           </form>
         </div>
-      </section>
+      </Section>
 
       {/* 모바일 하단 고정 CTA — 상담 신청 섹션에서는 숨김 */}
       <div
@@ -821,43 +800,45 @@ function LandingPageInner() {
         style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
         aria-hidden={!showStickyCta}
       >
-        <div className="mx-auto flex max-w-lg">
+        <div className="landing-container flex">
           <button
             type="button"
             onClick={scrollToForm}
-            className="touch-manipulation min-h-[48px] w-full rounded-xl py-3 text-[14px] font-semibold text-white active:opacity-80"
+            className="touch-manipulation min-h-[48px] w-full rounded-xl py-3 text-[15px] font-semibold text-white active:opacity-80"
             style={{ backgroundColor: BLUE }}
           >
-            무료 상담 신청
+            무료 상담 신청하기
           </button>
         </div>
       </div>
 
       {/* Footer */}
       <footer
-        className="px-4 py-10 text-center sm:px-6 sm:py-12"
+        className="landing-section text-center"
         style={{
           backgroundColor: NAVY,
           paddingBottom: "max(2.5rem, env(safe-area-inset-bottom))",
         }}
       >
-        <p className="text-lg font-medium text-white">런웨이 광고대행사</p>
-        <p className="mt-2 text-sm text-[#99a1af]">투명한 광고 운영 파트너</p>
-        <div className="mt-6 space-y-1 text-xs text-[#99a1af]">
-          <p>사업자등록번호: 326-02-03126</p>
-          <p>통신판매신고: 제 2026-서울영등포-1088 호</p>
-          <p>이메일: ads.runwaykorea@gmail.com</p>
-          <p>
-            연락처:{" "}
-            <a href="tel:010-7753-9765" className="text-[#99a1af] hover:text-white">
-              010-7753-9765
-            </a>
+        <div className="landing-container">
+          <p className="text-lg font-medium text-white">런웨이 광고대행사</p>
+          <p className="mt-2 text-sm text-[#99a1af]">뷰티샵 SNS 광고관리 파트너</p>
+          <div className="mt-6 space-y-1 text-xs text-[#99a1af]">
+            <p>사업자등록번호: 326-02-03126</p>
+            <p>통신판매신고: 제 2026-서울영등포-1088 호</p>
+            <p>이메일: ads.runwaykorea@gmail.com</p>
+            <p>
+              연락처:{" "}
+              <a href="tel:010-7753-9765" className="text-[#99a1af] hover:text-white">
+                010-7753-9765
+              </a>
+            </p>
+            <p>사업장소재지: 서울특별시 영등포구 국회대로38길 8, 403호</p>
+          </div>
+          <p className="mt-8 border-t border-[#364153] pt-6 text-xs text-[#99a1af]">
+            © 2026 런웨이 광고대행사. All rights reserved.
           </p>
-          <p>사업장소재지: 서울특별시 영등포구 국회대로38길 8, 403호</p>
         </div>
-        <p className="mt-8 border-t border-[#364153] pt-6 text-xs text-[#99a1af]">
-          © 2026 런웨이 광고대행사. All rights reserved.
-        </p>
       </footer>
     </div>
   );

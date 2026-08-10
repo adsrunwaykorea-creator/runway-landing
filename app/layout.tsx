@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "런웨이 | 소상공인 광고관리",
+  title: "런웨이 | 뷰티샵 SNS 광고관리",
   description:
-    "월 330,000원부터 전문 마케터 구독. 9년차 퍼포먼스 마케터가 광고 세팅부터 운영, 보고서까지 도와드립니다.",
+    "월 399,000원 뷰티 전문 SNS 광고관리. 광고비 거품 없이, 고객 DB 품질은 일정하게. 광고비는 매체에 직접 결제하고 런웨이는 월 관리비만 받습니다.",
 };
 
 export const viewport: Viewport = {
