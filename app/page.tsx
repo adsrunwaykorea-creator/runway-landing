@@ -114,10 +114,6 @@ function formatPerformanceLine(text: string) {
   );
 }
 
-function scrollTo(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
 function Section({
   children,
   className = "",
@@ -189,6 +185,59 @@ function ProblemCheck({ delayMs }: { delayMs: number }) {
   );
 }
 
+function AdvantageCards() {
+  const listRef = useRef<HTMLUListElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 },
+    );
+
+    observer.observe(list);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <ul ref={listRef} className="landing-content landing-card-list">
+      {ADVANTAGES.map((card, index) => (
+        <li
+          key={card.title}
+          className="landing-card landing-card--soft landing-card--stack benefit-card"
+        >
+          <div className="benefit-card__body">
+            <div className="benefit-card__aside">
+              <span className="star-badge" aria-hidden="true">
+                ★
+              </span>
+              <span className="landing-card__index">{index + 1}</span>
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="benefit-title">
+                <span
+                  className={`animated-red-underline${visible ? " is-visible" : ""}`}
+                >
+                  {card.title}
+                </span>
+              </p>
+              <p className="landing-card__desc">{card.desc}</p>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function LandingPageInner() {
   const searchParams = useSearchParams();
 
@@ -210,8 +259,9 @@ function LandingPageInner() {
   }>({});
   const [referrer, setReferrer] = useState<string | null>(null);
   const [landingPage, setLandingPage] = useState<string | null>(null);
-  const [showStickyCta, setShowStickyCta] = useState(true);
+  const [showStickyCta, setShowStickyCta] = useState(false);
   const consultationRef = useRef<HTMLElement>(null);
+  const formInViewRef = useRef(false);
   const daangnConversionTrackedRef = useRef(false);
 
   useEffect(() => {
@@ -235,21 +285,36 @@ function LandingPageInner() {
     if (!section) return;
 
     const updateStickyCta = () => {
-      const { top } = section.getBoundingClientRect();
-      setShowStickyCta(top > window.innerHeight - 80);
+      const scrolledEnough = window.scrollY > 250;
+      setShowStickyCta(scrolledEnough && !formInViewRef.current);
     };
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        formInViewRef.current = entry.isIntersecting;
+        updateStickyCta();
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -12% 0px" },
+    );
+
+    observer.observe(section);
     updateStickyCta();
     window.addEventListener("scroll", updateStickyCta, { passive: true });
     window.addEventListener("resize", updateStickyCta);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("scroll", updateStickyCta);
       window.removeEventListener("resize", updateStickyCta);
     };
   }, []);
 
-  const scrollToForm = () => scrollTo("consultation-form");
+  const scrollToForm = () => {
+    document.getElementById("contact-form")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -346,7 +411,7 @@ function LandingPageInner() {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-[calc(5.5rem+env(safe-area-inset-bottom))] text-[#0f172a] sm:pb-0">
+    <div className="landing-page min-h-screen bg-white text-[#0f172a]">
       {/* 1. 히어로 */}
       <Section className="landing-section--hero">
         <div className="landing-hero">
@@ -526,19 +591,7 @@ function LandingPageInner() {
       {/* 4. 핵심 장점 */}
       <Section style={{ backgroundColor: BLUE_LIGHT }}>
         <SectionTitle>런웨이가 광고비를 직접 받지 않는 이유</SectionTitle>
-        <ul className="landing-content landing-card-list">
-          {ADVANTAGES.map((card, index) => (
-            <li key={card.title} className="landing-card landing-card--soft landing-card--stack">
-              <div className="flex items-start gap-3 sm:gap-4">
-                <span className="landing-card__index">{index + 1}</span>
-                <div className="min-w-0 flex-1">
-                  <p className="landing-card__title">{card.title}</p>
-                  <p className="landing-card__desc">{card.desc}</p>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <AdvantageCards />
       </Section>
 
       {/* 5. 고객 모으는 방식 */}
@@ -657,7 +710,7 @@ function LandingPageInner() {
       {/* 9. 상담신청 폼 */}
       <Section
         sectionRef={consultationRef}
-        id="consultation"
+        id="contact-form"
         className="scroll-mt-3 sm:scroll-mt-4"
       >
         <div className="landing-form-wrap">
@@ -792,25 +845,17 @@ function LandingPageInner() {
         </div>
       </Section>
 
-      {/* 모바일 하단 고정 CTA — 상담 신청 섹션에서는 숨김 */}
-      <div
-        className={`fixed inset-x-0 bottom-0 z-50 border-t border-[#e2e8f0] bg-white/95 px-4 py-3 backdrop-blur-sm transition-transform duration-300 ease-out sm:hidden ${
-          showStickyCta ? "translate-y-0" : "pointer-events-none translate-y-full"
-        }`}
-        style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
+      {/* 스크롤 고정 CTA — 250px 이후 표시, 폼 영역에서는 숨김 */}
+      <button
+        type="button"
+        className={`sticky-cta${showStickyCta ? " is-visible" : ""}`}
+        onClick={scrollToForm}
+        aria-label="무료 상담 신청하기"
         aria-hidden={!showStickyCta}
+        tabIndex={showStickyCta ? 0 : -1}
       >
-        <div className="landing-container flex">
-          <button
-            type="button"
-            onClick={scrollToForm}
-            className="touch-manipulation min-h-[48px] w-full rounded-xl py-3 text-[15px] font-semibold text-white active:opacity-80"
-            style={{ backgroundColor: BLUE }}
-          >
-            무료 상담 신청하기
-          </button>
-        </div>
-      </div>
+        무료 상담 신청하기
+      </button>
 
       {/* Footer */}
       <footer

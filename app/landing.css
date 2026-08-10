@@ -636,3 +636,240 @@
   border-bottom: 2px solid #ef4444;
   width: fit-content;
 }
+
+.benefit-card {
+  position: relative;
+  padding: 1.5rem 1.25rem !important; /* ~24-28px */
+}
+
+@media (min-width: 640px) {
+  .benefit-card {
+    padding: 1.75rem 1.75rem !important; /* ~28-32px */
+  }
+}
+
+.benefit-card__body {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .benefit-card__body {
+    gap: 1rem;
+  }
+}
+
+.benefit-card__aside {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.125rem;
+}
+
+.star-badge {
+  display: block;
+  color: #ef4444;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1;
+  text-align: center;
+  margin-bottom: 0.4rem;
+}
+
+@media (min-width: 640px) {
+  .star-badge {
+    font-size: 1.25rem; /* 20px */
+    margin-bottom: 0.5rem;
+  }
+}
+
+.benefit-card .landing-card__index {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .benefit-card .landing-card__index {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.8125rem;
+  }
+}
+
+.benefit-title {
+  margin: 0;
+  word-break: keep-all;
+  font-size: 1.1875rem; /* 19px mobile */
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+@media (min-width: 640px) {
+  .benefit-title {
+    font-size: 1.5rem; /* 24px */
+  }
+}
+
+.benefit-card .landing-card__desc {
+  margin-top: 0.875rem; /* ~14px */
+  font-size: 0.9375rem; /* 15px */
+}
+
+@media (min-width: 640px) {
+  .benefit-card .landing-card__desc {
+    margin-top: 1rem; /* 16px */
+    font-size: 1rem; /* 16px */
+  }
+}
+
+.animated-red-underline {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  word-break: keep-all;
+  font-weight: 800;
+  color: inherit;
+  padding-bottom: 4px;
+  line-height: 1.35;
+}
+
+.animated-red-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #ef4444;
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+}
+
+.animated-red-underline.is-visible::after {
+  animation: underlineLoop 4s ease-out infinite;
+}
+
+@keyframes underlineLoop {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  20% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  70% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  85% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-red-underline::after {
+    transform: scaleX(1);
+    opacity: 1;
+    animation: none;
+  }
+}
+
+/* ===== Sticky floating CTA ===== */
+.landing-page {
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 769px) {
+  .landing-page {
+    padding-bottom: 0;
+  }
+}
+
+.sticky-cta {
+  position: fixed;
+  z-index: 9999;
+  border: none;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow:
+    0 8px 24px rgba(37, 99, 235, 0.35),
+    0 2px 8px rgba(15, 23, 42, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sticky-cta.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.sticky-cta:focus-visible {
+  outline: 2px solid #1e40af;
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .sticky-cta {
+    left: 16px;
+    right: 16px;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    width: calc(100% - 32px);
+    height: 52px;
+    border-radius: 14px;
+    font-size: 16px;
+    transform: translateY(8px);
+  }
+}
+
+@media (min-width: 769px) {
+  .sticky-cta {
+    top: 24px;
+    right: 32px;
+    left: auto;
+    bottom: auto;
+    width: auto;
+    height: auto;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-size: 15px;
+    transform: translateY(-8px);
+  }
+
+  .sticky-cta:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 28px rgba(37, 99, 235, 0.4),
+      0 4px 10px rgba(15, 23, 42, 0.14);
+  }
+
+  .sticky-cta.is-visible:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta {
+    transition: opacity 0.2s ease;
+  }
+}
