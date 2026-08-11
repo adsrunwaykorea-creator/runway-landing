@@ -99,6 +99,7 @@ type LeadPayload = {
   name: string;
   phone: string;
   business_type?: string;
+  store_name?: string;
   region?: string;
   message?: string;
   privacy_agreed: boolean;
@@ -256,6 +257,7 @@ function LandingPageInner() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [businessType, setBusinessType] = useState("");
+  const [storeName, setStoreName] = useState("");
   const [region, setRegion] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -375,6 +377,7 @@ function LandingPageInner() {
       name: name.trim(),
       phone: phone.trim(),
       business_type: businessType.trim() || undefined,
+      store_name: storeName.trim() || undefined,
       region: region.trim() || undefined,
       message: message.trim() || undefined,
       privacy_agreed: agreed,
@@ -828,6 +831,20 @@ function LandingPageInner() {
               />
             </div>
             <div>
+              <label htmlFor="store_name" className="mb-2 block text-sm font-medium text-[#364153]">
+                매장명
+              </label>
+              <input
+                id="store_name"
+                name="store_name"
+                type="text"
+                placeholder="예: ○○에스테틱, ○○두피센터"
+                className="w-full rounded-lg border border-[#d1d5dc] px-4 py-3 text-base outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20"
+                value={storeName}
+                onChange={(e) => setStoreName(e.target.value)}
+              />
+            </div>
+            <div>
               <label htmlFor="region" className="mb-2 block text-sm font-medium text-[#364153]">
                 매장 지역
               </label>
@@ -835,7 +852,7 @@ function LandingPageInner() {
                 id="region"
                 name="region"
                 type="text"
-                placeholder="예: 서울 강남구 역삼동"
+                placeholder="예: 서울 강남구 역삼동, 인천 송도, 부산 해운대"
                 className="w-full rounded-lg border border-[#d1d5dc] px-4 py-3 text-base outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20"
                 value={region}
                 onChange={(e) => setRegion(e.target.value)}
@@ -873,7 +890,7 @@ function LandingPageInner() {
                 </p>
                 <p>
                   <strong className="text-[#364153]">수집 항목:</strong> 이름, 연락처, 업종,
-                  매장 지역, 문의 내용
+                  매장명, 매장 지역, 문의 내용
                 </p>
                 <p>
                   <strong className="text-[#364153]">보유 기간:</strong> 상담 종료 후 1년 또는

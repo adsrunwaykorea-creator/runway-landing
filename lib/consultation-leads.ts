@@ -11,6 +11,7 @@ export type ConsultationLeadRow = {
   phone?: string | null;
   company?: string | null;
   business_type: string;
+  store_name?: string | null;
   region: string;
   monthly_budget: string;
   goal: string;
